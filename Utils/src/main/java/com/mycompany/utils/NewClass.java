@@ -5,6 +5,8 @@
  */
 package com.mycompany.utils;
 
+import java.io.File;
+
 /**
  *
  * @author brettsa
@@ -12,10 +14,18 @@ package com.mycompany.utils;
 public class NewClass {
 
     public static void main(String[] args) {
-        String path = "C:\\Users\\brettsa\\Documents\\GitHub\\general\\Test Text.txt";
+        
+    }
 
+    public String readFile() {
+        String path = "C:\\Users\\brettsa\\Documents\\GitHub\\general\\TestText.txt";
+        File f = new File(path);
+        
+        System.out.println(f.exists());
+        
         String contents = IOUts.readFileToString(path, "UTF-8");
 
-        System.out.println(contents);
+        return contents;
     }
+
 }
