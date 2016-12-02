@@ -30,17 +30,24 @@ public class PerformanceTest {
          long endTime = System.nanoTime();
          System.out.println(String.format("%-2d: %s", (i + 1), toString(endTime - startTime)));
          }*/
-        test2pixels(hugeImage);
+       // test2pixels(hugeImage);
 
-        int[][] result = convertTo2DWithoutUsingGetRGB(hugeImage);
-
+        PixelMap pixelMap = PixelMap.convertToPixelMap(hugeImage);
         
-
-        for (int j = 0; j < result[0].length; j++) {
-            for (int i = 0; i < result.length; i++) {
-                System.out.println(i + " " + j + " " + result[i][j]);
+        System.out.println("PixelMap Size: " + pixelMap.map.size());
+        
+        for (PixelColumn pc : pixelMap.map){
+            for (RGBValues rgb : pc.column){
+                System.out.println(rgb.getBlue());
             }
         }
+        
+
+//        for (int j = 0; j < result[0].length; j++) {
+//            for (int i = 0; i < result.length; i++) {
+//                System.out.println(i + " " + j + " " + result[i][j]);
+//            }
+//        }
 
     }
 
@@ -108,6 +115,59 @@ public class PerformanceTest {
         }
 
         return result;
+    }
+
+    private static PixelMap convertToPixelMap(BufferedImage image) {
+
+        final PixelMap pixelMap = new PixelMap();
+        final byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+        final int width = image.getWidth();
+        final int height = image.getHeight();
+        final boolean hasAlphaChannel = image.getAlphaRaster() != null;
+
+        int[][] result = new int[height][width];
+        if (hasAlphaChannel) {
+            final int pixelLength = 4;
+            for (int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += pixelLength) {
+                
+                System.out.println(row + " " + col);
+                
+                int argb = 0;
+                argb += (((int) pixels[pixel] & 0xff) << 24); // alpha
+                argb += ((int) pixels[pixel + 1] & 0xff); // blue
+                argb += (((int) pixels[pixel + 2] & 0xff) << 8); // green
+                argb += (((int) pixels[pixel + 3] & 0xff) << 16); // red
+                result[row][col] = argb;
+                col++;
+                if (col == width) {
+                    col = 0;
+                    row++;
+                }
+            }
+        } else {
+            final int pixelLength = 3;
+            PixelColumn column = new PixelColumn(width);
+            for (int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += pixelLength) {
+                int argb = 0;
+                
+                System.out.println("Row/Col: " + row + " " + col);
+                
+                column.add(col, pixels[pixel]);
+
+                col++;
+                if (col == width) {
+                    
+                    pixelMap.add(row, column);
+                    
+                    column = new PixelColumn(width);
+                    
+                    col = 0;
+                    row++;
+                }
+            }
+        }
+
+        return pixelMap;
     }
 
     private static String toString(long nanoSecs) {

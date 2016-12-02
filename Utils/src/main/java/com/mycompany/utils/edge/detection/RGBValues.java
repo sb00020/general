@@ -13,6 +13,14 @@ public class RGBValues {
 
     private final int red, blue, green;
 
+    public RGBValues(byte rgb) {
+
+        red = (rgb >> 16) & 0x0ff;
+        green = (rgb >> 8) & 0x0ff;
+        blue = (rgb) & 0x0ff;
+
+    }
+
     public RGBValues(int red, int blue, int green) {
 
         this.red = red;
