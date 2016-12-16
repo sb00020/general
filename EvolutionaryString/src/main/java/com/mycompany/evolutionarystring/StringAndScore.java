@@ -33,4 +33,14 @@ public class StringAndScore {
     public void setRndString(String rndString) {
         this.rndString = rndString;
     }
+    
+    public static int getScore(char[] target, char[] attempt) {
+        int score = 0;
+        for (int i = 0; i < target.length; i++) {
+            int s = (int) (target[i] - attempt[i]);
+            score += Math.abs(s);
+        }
+        return score;
+    }
+    
 }
