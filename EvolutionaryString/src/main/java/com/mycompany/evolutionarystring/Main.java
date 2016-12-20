@@ -5,9 +5,6 @@
  */
 package com.mycompany.evolutionarystring;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 /**
  *
  * @author brettsa
@@ -17,6 +14,6 @@ public class Main {
     public static void main(String[] args) {
 
         EvString es = new EvString();
-        es.run();
+        es.runNew();
     }
 }
