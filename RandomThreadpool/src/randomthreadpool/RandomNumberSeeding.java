@@ -31,16 +31,16 @@ public class RandomNumberSeeding implements Callable {
     public Object call() throws Exception {
         rnd = new Random(seed);
 
-        double[] list = new double[4];
+        double[] list = new double[1];
 
         for (int i = 0; i < list.length; i++) {
 
             double d = rnd.nextDouble();
-            list[i] = d+thread;
+            list[i] = d;
 
         }
         
-       // Thread.sleep(1000);
+        Thread.sleep(1000);
         return new OutputMessage(list, thread);
 
     }

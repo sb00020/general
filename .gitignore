@@ -10,3 +10,4 @@ EvolutionaryString/target/classes/com/mycompany/evolutionarystring/StringAndScor
 *.netbeans_automatic_build
 *.jar
 *.properties
+*.class
