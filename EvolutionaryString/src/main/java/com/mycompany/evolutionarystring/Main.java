@@ -5,15 +5,17 @@
  */
 package com.mycompany.evolutionarystring;
 
+import java.io.IOException;
+
 /**
  *
  * @author brettsa
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         EvString es = new EvString();
-        es.runNew();
+        es.runNew(false);
     }
 }

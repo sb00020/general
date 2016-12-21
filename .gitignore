@@ -6,3 +6,7 @@ EvolutionaryString/out.csv
 *.class
 
 EvolutionaryString/target/classes/com/mycompany/evolutionarystring/StringAndScore.class
+*.class
+*.netbeans_automatic_build
+*.jar
+*.properties

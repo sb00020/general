@@ -27,4 +27,9 @@ public class OutputMessage {
         this.thread= thread;
     }
     
+    public OutputMessage (){
+this.list = null;
+        this.thread= 0;
+    }
+    
 }

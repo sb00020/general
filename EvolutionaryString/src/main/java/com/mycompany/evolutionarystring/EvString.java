@@ -25,13 +25,13 @@ public class EvString {
     Random rnd = new Random(System.currentTimeMillis());
     char[] chars;
 
-    public void runNew() throws FileNotFoundException, IOException {
-
-        File output = new File("/Users/Sam/NetBeansProjects/out2.csv");
-        FileOutputStream fileOutputStream = new FileOutputStream(output, true);
-        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
-                fileOutputStream, 128 * 100);
-
+    public void runNew(boolean fileOut) throws FileNotFoundException, IOException {
+        if (fileOut) {
+            File output = new File("/Users/Sam/NetBeansProjects/out2.csv");
+            FileOutputStream fileOutputStream = new FileOutputStream(output, true);
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
+                    fileOutputStream, 128 * 100);
+        }
         String target = "Hello, World!";
         int targetLength = target.length();
 
@@ -83,23 +83,24 @@ public class EvString {
             if (parents.get(0).getScore() < bestScore) {
 
                 bestScore = parents.get(0).getScore();
-                
+
                 String o = l + "," + parents.get(0).getScore() + "\n";
 
-                System.out.println(l + "," + parents.get(0).getScore());
+                System.out.println(l + "," + parents.get(0).getScore()+ "  " + parents.get(0).getRndString());
 
-                bufferedOutputStream.write(o.getBytes(Charset
-                        .forName("UTF-8")));
+                if (fileOut) {
+                    //bufferedOutputStream.write(o.getBytes(Charset.forName("UTF-8")));
+                }
             }
-            
+
             if (parents.get(0).getScore() == 0) {
                 break;
             }
 
         }
 
-        bufferedOutputStream.flush();
-        fileOutputStream.close();
+//        bufferedOutputStream.flush();
+ //       fileOutputStream.close();
     }
 
     public void run() {
@@ -220,6 +221,12 @@ public class EvString {
 
         for (int i = 0; i < num; i++) {
             parents.add(this.generateRandomCharArray(targetLength));
+            
+            
+            
+            
+            
+            
         }
 
         return parents;

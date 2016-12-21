@@ -2,7 +2,7 @@ package randomthreadpool;
 
 public class Worker implements Runnable {
     
-    private String command;
+    private final String command;
     
     public Worker(String s){
         this.command=s;
