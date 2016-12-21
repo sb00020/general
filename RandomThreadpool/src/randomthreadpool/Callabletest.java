@@ -1,5 +1,6 @@
 package randomthreadpool;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -15,10 +16,20 @@ public class Callabletest {
     public void callable() {
         final ExecutorService service;
 
-        service = Executors.newFixedThreadPool(6);
+        int numThreads = 200;
+        int threadpoolSize = 64;
+       
+        ArrayList<OutputMessage> outputs = new ArrayList<>();
+        
+        for (int i = 0; i < numThreads; i++){
+            outputs.add(i, new OutputMessage());
+        } 
+        
+        
+        service = Executors.newFixedThreadPool(threadpoolSize);
         Set<Future<OutputMessage>> set = new HashSet<>();
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < numThreads; i++) {
             InputMessage iMess = new InputMessage(i, i + 2);
             Callable<OutputMessage> callable = new RandomNumberSeeding(iMess);
             Future<OutputMessage> future = service.submit(callable);
@@ -30,8 +41,10 @@ public class Callabletest {
                 int thread = out.get().getThread();
                 double[] list = out.get().getList();
 
+                outputs.set(thread, new OutputMessage(list, thread));
+                
                 for (double d : list) {
-                    System.out.println("thread " + thread + " double: " + d);
+                //    System.out.println("thread " + thread + " double: " + d);
                 }
 
             } catch (InterruptedException | ExecutionException ex) {
@@ -39,5 +52,13 @@ public class Callabletest {
             }
         });
         service.shutdownNow();
+        
+        for (OutputMessage o : outputs){
+            for (double d : o.getList()){
+            System.out.println("Thread: " + o.getThread() + " Number: " + d);
+        }}
+        
+        
+        
     }
 }

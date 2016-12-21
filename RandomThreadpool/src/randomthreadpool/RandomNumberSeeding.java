@@ -31,7 +31,7 @@ public class RandomNumberSeeding implements Callable {
     public Object call() throws Exception {
         rnd = new Random(seed);
 
-        double[] list = new double[1];
+        double[] list = new double[4];
 
         for (int i = 0; i < list.length; i++) {
 
@@ -40,7 +40,7 @@ public class RandomNumberSeeding implements Callable {
 
         }
         
-        Thread.sleep(1000);
+        Thread.sleep(rnd.nextInt(500));
         return new OutputMessage(list, thread);
 
     }

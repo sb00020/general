@@ -10,7 +10,7 @@ package randomthreadpool;
  * @author brettsa
  */
 public class OutputMessage {
-    
+
     private final double[] list;
     private final int thread;
 
@@ -21,10 +21,15 @@ public class OutputMessage {
     public int getThread() {
         return thread;
     }
-    
-    public OutputMessage (double[] list, int thread){
+
+    public OutputMessage(double[] list, int thread) {
         this.list = list;
-        this.thread= thread;
+        this.thread = thread;
     }
-    
+
+    public OutputMessage() {
+        this.list = null;
+        this.thread = 0;
+    }
+
 }
