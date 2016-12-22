@@ -1,4 +1,9 @@
-package randomthreadpool;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.generics.blah;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,27 +15,42 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import randomthreadpool.Callabletest;
+import randomthreadpool.InputMessage;
+import randomthreadpool.OutputMessage;
+import randomthreadpool.RandomNumberSeeding;
 
-public class Callabletest {
+/**
+ *
+ * @author brettsa
+ * @param <T>
+ */
+public class CallableItem< T extends CallableWork> {
 
-    public void callable() {
-        final ExecutorService service;
+    int numThreads;
+    int numberOfExecutors;
+    final ExecutorService service;
 
-        int numThreads = 200;
-        int threadpoolSize = 64;
+    public CallableItem() {
+        numThreads = 200;
+        numberOfExecutors = 64;
 
+        service = Executors.newFixedThreadPool(numberOfExecutors);
+
+    }
+
+    public Object run(T t) throws Exception {
         ArrayList<OutputMessage> outputs = new ArrayList<>();
 
         for (int i = 0; i < numThreads; i++) {
             outputs.add(i, new OutputMessage());
         }
 
-        service = Executors.newFixedThreadPool(threadpoolSize);
         Set<Future<OutputMessage>> set = new HashSet<>();
 
         for (int i = 0; i < numThreads; i++) {
             InputMessage iMess = new InputMessage(i, i + 2);
-            Callable<OutputMessage> callable = new RandomNumberSeeding(iMess);
+            Callable<OutputMessage> callable = t;
             Future<OutputMessage> future = service.submit(callable);
             set.add(future);
         }
@@ -43,7 +63,7 @@ public class Callabletest {
                 outputs.set(thread, new OutputMessage(list, thread));
 
                 for (double d : list) {
-                    //    System.out.println("thread " + thread + " double: " + d);
+                        System.out.println("thread " + thread + " double: " + d);
                 }
 
             } catch (InterruptedException | ExecutionException ex) {
@@ -57,6 +77,11 @@ public class Callabletest {
                 System.out.println("Thread: " + o.getThread() + " Number: " + d);
             }
         }
+        
+        
+        
+        return outputs;
 
     }
+
 }

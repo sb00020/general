@@ -5,11 +5,13 @@
  */
 package randomthreadpool;
 
+import com.mycompany.generics.messages.AbstractInputMessage;
+
 /**
  *
  * @author brettsa
  */
-public class OutputMessage {
+public class OutputMessage extends AbstractInputMessage {
 
     private final double[] list;
     private final int thread;
