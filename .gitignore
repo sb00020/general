@@ -1,3 +1,13 @@
 /Utils/target/
-/MvnThreadPool/target/
+EvolutionaryString/out.csv
+
+*.class
+
+*.class
+
+EvolutionaryString/target/classes/com/mycompany/evolutionarystring/StringAndScore.class
+*.class
+*.netbeans_automatic_build
+*.jar
+*.properties
 *.class

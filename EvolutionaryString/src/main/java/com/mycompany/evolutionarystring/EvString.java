@@ -5,6 +5,12 @@
  */
 package com.mycompany.evolutionarystring;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,6 +24,84 @@ public class EvString {
 
     Random rnd = new Random(System.currentTimeMillis());
     char[] chars;
+
+    public void runNew(boolean fileOut) throws FileNotFoundException, IOException {
+        if (fileOut) {
+            File output = new File("/Users/Sam/NetBeansProjects/out2.csv");
+            FileOutputStream fileOutputStream = new FileOutputStream(output, true);
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(
+                    fileOutputStream, 128 * 100);
+        }
+        String target = "Hello, World!";
+        int targetLength = target.length();
+
+        chars = target.toCharArray();
+
+        ArrayList<char[]> parentChars = createInitialParents(8, targetLength);
+
+        ArrayList<StringAndScore> parents = new ArrayList<>();
+
+        for (int i = 0; i < parentChars.size(); i++) {
+
+            String s = new String(parentChars.get(i));
+            int score = this.getScore(target.toCharArray(), parentChars.get(i));
+            parents.add(new StringAndScore(s, score));
+
+        }
+
+        Collections.sort(parents, new ScoreComparator());
+        for (int i = 0; i < parentChars.size(); i++) {
+            System.out.println(parents.get(i).rndString + parents.get(i).score);
+        }
+
+        System.out.println("Loop Starts:");
+
+        int bestScore = 110000;
+
+        for (int l = 0; l < 200000; l++) {
+
+            ParentSet ps = new ParentSet(parents.get(0), parents.get(1), parents.get(2), parents.get(3));
+
+            ArrayList<StringAndScore[]> couples = ps.getParentPairs();
+
+            ArrayList<StringAndScore> children1 = produceChildrenFromFittestParents(couples.get(0), 18);
+            ArrayList<StringAndScore> children2 = produceChildrenFromFittestParents(couples.get(1), 18);
+
+            ArrayList<StringAndScore> genePool = new ArrayList<>();
+
+            genePool.addAll(parents);
+            genePool.addAll(children1.subList(0, 4));
+            genePool.addAll(children2.subList(0, 4));
+
+            Collections.sort(genePool, new ScoreComparator());
+            //System.out.println("\n\n");
+
+            parents = new ArrayList<>();
+            //          System.out.println(parents.size() + "  " + genePool.size());
+            parents.addAll(genePool.subList(0, 6));
+
+            if (parents.get(0).getScore() < bestScore) {
+
+                bestScore = parents.get(0).getScore();
+
+                String o = l + "," + parents.get(0).getScore() + "\n";
+
+                System.out.println(l + "," + parents.get(0).getScore()+ "  " + parents.get(0).getRndString());
+
+                if (fileOut) {
+                    //bufferedOutputStream.write(o.getBytes(Charset.forName("UTF-8")));
+                }
+            }
+
+            if (parents.get(0).getScore() == 0) {
+                break;
+            }
+
+        }
+
+//        bufferedOutputStream.flush();
+ //       fileOutputStream.close();
+    }
 
     public void run() {
         String target = "Hello, World!";
@@ -62,18 +146,21 @@ public class EvString {
 
     }
 
+    public ArrayList<StringAndScore> produceChildrenFromFittestParents(StringAndScore[] ps, int i) {
+        return this.produceChildrenFromFittestParents(ps[0], ps[1], i);
+    }
+
     private ArrayList<StringAndScore> produceChildrenFromFittestParents(StringAndScore p1, StringAndScore p2, int length) {
 
         ArrayList<StringAndScore> childrenss = new ArrayList<>();
 
-        System.out.println("p1: " + p1.rndString);
-        System.out.println("p2: " + p2.rndString);
-
+        // System.out.println("p1: " + p1.rndString);
+        //System.out.println("p2: " + p2.rndString);
         for (int j = 0; j < length; j++) {
 
             char[] child = p1.rndString.toCharArray();
 
-            int p2Dom = rnd.nextInt(length-1);
+            int p2Dom = rnd.nextInt(length - 1);
 
             for (int i = 0; i < p2Dom; i++) {
 
@@ -83,9 +170,9 @@ public class EvString {
                 child[c1] = p2.getRndString().toCharArray()[c2];
 
             }
-            
+
             child = mutateChild(child);
-            
+
             childrenss.add(new StringAndScore(new String(child), StringAndScore.getScore(chars, child)));
 
         }
@@ -94,14 +181,16 @@ public class EvString {
     }
 
     private char[] mutateChild(char[] child) {
-        
-        for (int i = 0; i< 3; i++) {
+
+        int mutations = rnd.nextInt(child.length);
+
+        for (int i = 0; i < mutations; i++) {
             int rndChar = rnd.nextInt(child.length);
-            
+
             child[rndChar] = randomChar();
-            
+
         }
-        
+
         return child;
     }
 
@@ -132,6 +221,12 @@ public class EvString {
 
         for (int i = 0; i < num; i++) {
             parents.add(this.generateRandomCharArray(targetLength));
+            
+            
+            
+            
+            
+            
         }
 
         return parents;
