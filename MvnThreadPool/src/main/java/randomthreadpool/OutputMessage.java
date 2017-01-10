@@ -5,24 +5,24 @@
  */
 package randomthreadpool;
 
-import com.mycompany.generics.messages.AbstractInputMessage;
+import com.mycompany.generics.messages.AbstractOutputMessage;
 
 /**
  *
  * @author brettsa
  */
-public class OutputMessage extends AbstractInputMessage {
+public class OutputMessage extends AbstractOutputMessage{
+
 
     private final double[] list;
-    private final int thread;
 
     public double[] getList() {
         return list;
     }
-
+ 
     public int getThread() {
         return thread;
-    }
+    } 
 
     public OutputMessage(double[] list, int thread) {
         this.list = list;
@@ -33,5 +33,14 @@ public class OutputMessage extends AbstractInputMessage {
         this.list = null;
         this.thread = 0;
     }
+
+    @Override
+    public int compareTo(AbstractOutputMessage o) {       
+        
+        return this.thread - o.thread;
+        
+    }
+    
+    
 
 }

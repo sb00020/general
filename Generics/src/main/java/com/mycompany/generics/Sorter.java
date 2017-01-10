@@ -19,6 +19,17 @@ public class Sorter {
         }
         System.out.println();
     }
+    
+        // generic method printArray
+    public static <E> String returnArrayAsString(E[] inputArray) {
+        // Display array elements
+        String s = "";
+        for (E element : inputArray) {
+            s += element + " ";
+        }
+
+        return s;
+    }
 
     public static void run() {
         // Create arrays of Integer, Double and Character

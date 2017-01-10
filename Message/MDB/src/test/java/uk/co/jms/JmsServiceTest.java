@@ -10,7 +10,7 @@ public class JmsServiceTest {
 	public void write() throws Exception {
 
 		String connectionFactory = "myJmsTest/MyConnectionFactory";
-		String requestQueue = "myJmsTest/MyQueue";
+		String requestQueue = "jms/queue/request";
 		
 		String correlationId = UUID.randomUUID().toString();
 		
@@ -19,9 +19,9 @@ public class JmsServiceTest {
 		//Assert.assertEquals(request, "myRequest");
 		
 		System.out.println(request);
-		JmsServiceImpl jmsService = new JmsServiceImpl("server_name");
-		
-		correlationId = jmsService.sendTextMessage(connectionFactory, "requestQueue", "Contents");
+		JmsServiceImpl jmsService = new JmsServiceImpl("myserver");
+		System.out.println("service");
+		correlationId = jmsService.sendTextMessage(connectionFactory, requestQueue, "Contents");
 		
 		System.out.println(correlationId);
 		

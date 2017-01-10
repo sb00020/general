@@ -11,3 +11,4 @@ EvolutionaryString/target/classes/com/mycompany/evolutionarystring/StringAndScor
 *.jar
 *.properties
 *.class
+/MvnThreadPool/target/
