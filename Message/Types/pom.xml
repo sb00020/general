@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>queue</groupId>
+	<artifactId>AddMessage-Types</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>blah</description>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<targetJdk>1.8</targetJdk>
+	</properties>
+
+
+
+    <build>
+        <plugins>
+            <!--plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${project.basedir}/src/test</basedir>
+                    <filesToInclude>resources/xsd/**/*.xsd</filesToInclude>
+                    <outputBaseDir>${project.basedir}</outputBaseDir>
+                    <outputDir>target/replaced</outputDir>
+                    <replacements>
+                        <token>oramds:///apps/XMLModel</token>
+                        <value>../</value>
+                    </replacements>
+                </configuration>
+            </plugin-->
+			<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>2.3</version>
+				<executions>
+					<execution>
+						<id>xjc</id>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<schemaFiles>**/*.xsd</schemaFiles>
+				</configuration>
+			</plugin>
+        </plugins>
+    </build>
+
+</project>
