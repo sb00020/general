@@ -9,9 +9,10 @@ package com.mycompany.generics.messages;
  *
  * @author brettsa
  */
-public abstract class AbstractOutputMessage {
+public abstract class AbstractOutputMessage implements Comparable<AbstractOutputMessage>{
     
     String status;
+    public int thread;
 
     public String getStatus() {
         return status;

@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>queue</groupId>
-	<artifactId>AddMessage</artifactId>
+	<artifactId>Messaging-MDB</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>blah</description>
 	<packaging>ejb</packaging>
@@ -17,6 +17,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>javax.jms</groupId>
+			<artifactId>javax.jms-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.jms</groupId>
 			<artifactId>jms</artifactId>
 			<version>1.1</version>
 		</dependency>
@@ -29,6 +34,11 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
+		</dependency>
+		<dependency>
+			<groupId>uk.co.service</groupId>
+			<artifactId>Messaging-Service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

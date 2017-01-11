@@ -15,10 +15,13 @@ public class ContextUtil {
 	}
 
 	public static Context open(String name) throws Exception {
+		System.out.println(name);
+		
+		
 		try{
 			return new InitialContext(getResourceAsProperties(name+".properties"));
 		}catch (Exception ioe){
-			throw new RuntimeException("ex");
+			throw new RuntimeException("Return", ioe);
 		}
 	}
 	
@@ -26,35 +29,43 @@ public class ContextUtil {
 		try{
 			context.close();
 		} catch (NamingException e){
-			throw new RuntimeException("");
+			throw new RuntimeException("closing");
 		}
 	}
 	
 	
 	protected static Properties getResourceAsProperties(final String name) throws Exception{
 		Properties properties = new Properties();
-		
-		try (InputStream in = getResourceAsStream(name)){
+		System.out.println("creating props");
+		try {
+			InputStream in = getResourceAsStream(name);
+			
 			properties.load(in);
+			properties.size();
 		} catch (IOException ioe){
-			throw new Exception("ex");
+			System.out.println("Stream is null");
+			throw new Exception("Loading Props");
 		}
 		return properties;	
 	}
 
 	private static InputStream getResourceAsStream(final String name) {
 		InputStream in = ContextUtil.class.getResourceAsStream(name);
+		System.out.println("creating input stream");
 		if (in != null) {
 			return in;
 		}
-		in =getClassLoader().getResourceAsStream(name);
+		in=getClassLoader().getResourceAsStream(name);
+		System.out.println(in);
 		if (in != null){
 			return in;
 		}
+		System.out.println(in);
 		return null;
 	}
 
 	protected static ClassLoader getClassLoader(){
+		System.out.println("Class Laoders");
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		if (classLoader != null){
 			return classLoader;

@@ -21,19 +21,19 @@ import javax.ejb.EJBException;
 
 @MessageDriven(name = "ThisBean", activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-		@ActivationConfigProperty(propertyName = "connectionFactoryJndiName", propertyValue = "jms/ConnectionFactory"),
-		@ActivationConfigProperty(propertyName = "destinationJndiName", propertyValue = "jms/request-queue")
+		@ActivationConfigProperty(propertyName = "connectionFactoryJndiName", propertyValue = "myJmsTest/MyConnectionFactory"),
+		@ActivationConfigProperty(propertyName = "destinationJndiName", propertyValue = "jms/queue/request")
 })
 public class BeanMDB implements MessageListener {
 
-	@Resource(mappedName="jms/ConnectionFactory")
+	@Resource(mappedName="myJmsTest/MyConnectionFactory")
 	private ConnectionFactory responseConnectionFactory;
 	
-	@Resource(mappedName="jms/response-queue")
+	@Resource(mappedName="jms/queue/response")
 	private Destination responseQueue;
 	
-	@Resource(mappedName="jdbc/DataSource")
-	private DataSource dataSource;
+	//@Resource(mappedName="jdbc/DataSource")
+	//private DataSource dataSource;
 	
 	private MyService service;
 	
