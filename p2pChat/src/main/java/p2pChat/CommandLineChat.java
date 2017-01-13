@@ -20,6 +20,7 @@ import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.jboss.naming.remote.client.InitialContextFactory;
 
 public class CommandLineChat implements MessageListener {
 
@@ -94,7 +95,7 @@ public class CommandLineChat implements MessageListener {
 		Properties props = new Properties();
 		props.setProperty("java.naming.factory.initial", "org.jboss.naming.remote.client.InitialContextFactory");
 		props.setProperty("java.naming.factory.url.pkgs", "org.jboss.naming");
-		props.setProperty("java.naming.provider.url", "localhost:8080");
+		props.setProperty("java.naming.provider.url", "localhost:9990");
 		Context context = new InitialContext(props);
 
 		return context;

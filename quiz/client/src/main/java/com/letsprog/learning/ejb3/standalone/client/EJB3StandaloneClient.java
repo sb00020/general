@@ -25,7 +25,7 @@ public class EJB3StandaloneClient {
 		// Using the JNDI name of the EJB following this pattern :
 		// "ejb:{EarName}/{ModuleName}/{DeploymentName}/{EJBClassName}!{EJBInterfaceFullyQualifiedName}?{Stateful}"
 		IRemoteQuiz remoteQuiz = (IRemoteQuiz) context.lookup("ejb:/ejb3-server-war-0.0.1-SNAPSHOT//QuizBean!com.letsprog.learning.ejb3.server.api.IRemoteQuiz?stateful");
-		remoteQuiz.begin("Farah");
+		remoteQuiz.begin("Sam");
 		String question = remoteQuiz.generateQuestionAndAnswer();
 		System.out.println("Question : "+question);
  
