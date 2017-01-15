@@ -16,7 +16,7 @@ import javax.jms.TextMessage;
 })
 @Stateless
 @LocalBean
-public class ReceivingMdb implements MessageListener {
+public class ReceivingMdbb implements MessageListener {
     @Override
     public void onMessage(Message message) {
         if (message instanceof TextMessage) {
