@@ -1,8 +1,8 @@
-com/letsprog/learning/ejb3/server/api/IQuiz.class
-com/letsprog/learning/ejb3/server/api/ILocalPlayedQuizzesCounter.class
-com/letsprog/learning/ejb3/server/api/IPlayedQuizzesCounter.class
-com/letsprog/learning/ejb3/server/api/IRemotePlayedQuizzesCounter.class
-com/letsprog/learning/ejb3/server/api/entities/LevelQuestion.class
-com/letsprog/learning/ejb3/server/api/ILocalQuiz.class
-com/letsprog/learning/ejb3/server/api/IRemoteQuiz.class
-com/letsprog/learning/ejb3/server/api/ILocalQuizQuestionGenerator.class
+com\letsprog\learning\ejb3\server\api\IRemoteQuiz.class
+com\letsprog\learning\ejb3\server\api\ILocalPlayedQuizzesCounter.class
+com\letsprog\learning\ejb3\server\api\IQuiz.class
+com\letsprog\learning\ejb3\server\api\entities\LevelQuestion.class
+com\letsprog\learning\ejb3\server\api\IRemotePlayedQuizzesCounter.class
+com\letsprog\learning\ejb3\server\api\ILocalQuizQuestionGenerator.class
+com\letsprog\learning\ejb3\server\api\ILocalQuiz.class
+com\letsprog\learning\ejb3\server\api\IPlayedQuizzesCounter.class
