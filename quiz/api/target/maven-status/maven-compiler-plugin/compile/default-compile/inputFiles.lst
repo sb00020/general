@@ -1,8 +1,8 @@
-/Users/Sam/Documents/Git/checkout/quiz/api/src/main/java/com/letsprog/learning/ejb3/server/api/ILocalQuizQuestionGenerator.java
-/Users/Sam/Documents/Git/checkout/quiz/api/src/main/java/com/letsprog/learning/ejb3/server/api/entities/LevelQuestion.java
-/Users/Sam/Documents/Git/checkout/quiz/api/src/main/java/com/letsprog/learning/ejb3/server/api/IQuiz.java
-/Users/Sam/Documents/Git/checkout/quiz/api/src/main/java/com/letsprog/learning/ejb3/server/api/IRemotePlayedQuizzesCounter.java
-/Users/Sam/Documents/Git/checkout/quiz/api/src/main/java/com/letsprog/learning/ejb3/server/api/ILocalPlayedQuizzesCounter.java
-/Users/Sam/Documents/Git/checkout/quiz/api/src/main/java/com/letsprog/learning/ejb3/server/api/ILocalQuiz.java
-/Users/Sam/Documents/Git/checkout/quiz/api/src/main/java/com/letsprog/learning/ejb3/server/api/IPlayedQuizzesCounter.java
-/Users/Sam/Documents/Git/checkout/quiz/api/src/main/java/com/letsprog/learning/ejb3/server/api/IRemoteQuiz.java
+C:\Users\brettsa\Documents\GitHub\general\quiz\api\src\main\java\com\letsprog\learning\ejb3\server\api\ILocalQuizQuestionGenerator.java
+C:\Users\brettsa\Documents\GitHub\general\quiz\api\src\main\java\com\letsprog\learning\ejb3\server\api\entities\LevelQuestion.java
+C:\Users\brettsa\Documents\GitHub\general\quiz\api\src\main\java\com\letsprog\learning\ejb3\server\api\IPlayedQuizzesCounter.java
+C:\Users\brettsa\Documents\GitHub\general\quiz\api\src\main\java\com\letsprog\learning\ejb3\server\api\IRemoteQuiz.java
+C:\Users\brettsa\Documents\GitHub\general\quiz\api\src\main\java\com\letsprog\learning\ejb3\server\api\IQuiz.java
+C:\Users\brettsa\Documents\GitHub\general\quiz\api\src\main\java\com\letsprog\learning\ejb3\server\api\IRemotePlayedQuizzesCounter.java
+C:\Users\brettsa\Documents\GitHub\general\quiz\api\src\main\java\com\letsprog\learning\ejb3\server\api\ILocalPlayedQuizzesCounter.java
+C:\Users\brettsa\Documents\GitHub\general\quiz\api\src\main\java\com\letsprog\learning\ejb3\server\api\ILocalQuiz.java
