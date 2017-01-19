@@ -9,9 +9,6 @@
         <dependent-module archiveName="calc-server-api-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/calc-server-api/calc-server-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="maths-lib-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/maths-lib/maths-lib">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="java-output-path" value="/ejb3-server-war/target/classes"/>
         <property name="context-root" value="calc-server-war"/>
     </wb-module>

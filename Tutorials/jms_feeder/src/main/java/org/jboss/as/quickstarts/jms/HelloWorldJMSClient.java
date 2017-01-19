@@ -92,23 +92,23 @@ public class HelloWorldJMSClient {
                 JMSProducer producer = context.createProducer();
                 
                 log.info("Creating connection");
-                Connection connection = connectionFactory.createConnection(DEFAULT_USERNAME, DEFAULT_PASSWORD);
+               try( Connection connection = connectionFactory.createConnection(DEFAULT_USERNAME, DEFAULT_PASSWORD)){
                 
                 log.info("Creating session");
                 Session session = connection.createSession();
                 
                 
                 log.info("Creating message");
-                TextMessage message = session.createTextMessage();
+                Message message = session.createTextMessage(content);
                 
-                message.setText(content);
-                String id = UUID.randomUUID().toString();
-                message.setJMSCorrelationID(id);
+               // message.setText();
+               // String id = UUID.randomUUID().toString();
+               // message.setJMSCorrelationID(id);
                 
-                System.out.println(id);
+               // System.out.println(id + "  " + message.getJMSCorrelationID());
                 
                 producer.send(requestDestination, message);
-                // id = producer.getJMSCorrelationID();
+                String id = message.getJMSMessageID();
                 
 
                 System.out.println("The correlation Id is: " + id);
@@ -120,7 +120,9 @@ public class HelloWorldJMSClient {
 //                    String text = consumer.receiveBody(String.class, 10000);
 //                    log.info("Received message with content " + text);
 //                }
+               } 
             } catch (JMSException e) {
+				
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 

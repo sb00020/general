@@ -66,10 +66,10 @@ public class HelloWorldQueueMDB implements MessageListener {
 			if (rcvMessage instanceof TextMessage) {
 				msg = (TextMessage) rcvMessage;
 				LOGGER.info("Received Message from queue: " + msg.getText());
-
+				LOGGER.info("Received Message Id: " + msg.getJMSMessageID());
 				LOGGER.warning("This is magic");
 
-				addResponse(msg.getJMSCorrelationID());
+				addResponse(msg.getJMSMessageID());
 
 			} else {
 				LOGGER.warning("Message of wrong type: " + rcvMessage.getClass().getName());
@@ -84,12 +84,16 @@ public class HelloWorldQueueMDB implements MessageListener {
 			final Destination destination = queue;
 
 			String text = "my witty reposnse";
-			TextMessage message = context.createTextMessage();
+			Message message = context.createTextMessage(text);
 
-			message.setText(text);
+			
 			message.setJMSCorrelationID(id);
-
+			message.setJMSMessageID(id);
+			LOGGER.info("Sending Response Message Id: " + message.getJMSCorrelationID());
+			
 			context.createProducer().send(destination, text);
+			LOGGER.info("Sent Response Message Id: " + message.getJMSCorrelationID());
+			
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
