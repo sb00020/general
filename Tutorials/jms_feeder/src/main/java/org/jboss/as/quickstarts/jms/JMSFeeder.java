@@ -35,14 +35,13 @@ import javax.naming.NamingException;
 import javax.jms.Connection;
 import org.jgroups.util.UUID;
 
-public class HelloWorldJMSClient {
-    private static final Logger log = Logger.getLogger(HelloWorldJMSClient.class.getName());
+public class JMSFeeder {
+    private static final Logger log = Logger.getLogger(JMSFeeder.class.getName());
 
     // Set up all the default values
     private static final String DEFAULT_MESSAGE = "Hello, World!";
     private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
     private static final String DEFAULT_REQUEST_DESTINATION = "/queue/request";
-    private static final String DEFAULT_RESPONSE_DESTINATION = "queue/response";
     private static final String DEFAULT_MESSAGE_COUNT = "1";
     private static final String DEFAULT_USERNAME = "jmsuser";
     private static final String DEFAULT_PASSWORD = "jmsuser@123";
@@ -81,9 +80,9 @@ public class HelloWorldJMSClient {
 
             try (JMSContext context = connectionFactory.createContext(userName, password)) {
             	
-            	String destinationRespString = System.getProperty("destination", DEFAULT_RESPONSE_DESTINATION);
+            //	String destinationRespString = System.getProperty("destination", DEFAULT_RESPONSE_DESTINATION);
             	
-            	Destination reponseDestination = (Destination) namingContext.lookup(destinationRespString);
+            //	Destination reponseDestination = (Destination) namingContext.lookup(destinationRespString);
             	//DEFAULT_RESPONSE_DESTINATION
             	
                 log.info("Sending " + count + " messages with content: " + content);
@@ -113,13 +112,7 @@ public class HelloWorldJMSClient {
 
                 System.out.println("The correlation Id is: " + id);
                 connection.close();
-                // Create the JMS consumer
-//                JMSConsumer consumer = context.createConsumer(reponseDestination);
-//                // Then receive the same number of messages that were sent
-//                for (int i = 0; i < count; i++) {
-//                    String text = consumer.receiveBody(String.class, 10000);
-//                    log.info("Received message with content " + text);
-//                }
+
                } 
             } catch (JMSException e) {
 				

@@ -33,8 +33,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class HelloWorldJMSClient {
-	private static final Logger log = Logger.getLogger(HelloWorldJMSClient.class.getName());
+public class JMSListener {
+	private static final Logger log = Logger.getLogger(JMSListener.class.getName());
 
 	// Set up all the default values
 	private static final String DEFAULT_MESSAGE = "Hello, World!";
@@ -96,9 +96,11 @@ public class HelloWorldJMSClient {
 
 				Message text = consumer.receive();
 				TextMessage tm = (TextMessage) text;
+				System.out.println();
 				log.info("Received message with content " + text);
-				
+				System.out.println();
 				log.info(text.getJMSMessageID());
+				System.out.println();
 				log.info(tm.getText());
 
 			} catch (IOException e) {
