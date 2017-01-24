@@ -17,8 +17,8 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jboss.quickstarts.eap</groupId>
-    <artifactId>jboss-helloworld-jms</artifactId>
+    <groupId>uk.co.brett.jms.driver</groupId>
+    <artifactId>JMS-Driver</artifactId>
     <version>7.0.0.GA</version>
     <packaging>jar</packaging>
     <name>JBoss EAP Quickstart: helloworld-jms</name>
@@ -124,7 +124,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${version.exec.plugin}</version>
                 <configuration>
-                    <mainClass>org.jboss.as.quickstarts.jms.JMSListener</mainClass>
+                    <mainClass>uk.co.brett.jms.JMSDriver</mainClass>
                     <systemProperties>
                         <!-- Override the default values of properties passed to the HelloWorldJMSClient -->
                         <!--
