@@ -26,81 +26,95 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSConsumer;
 import javax.jms.JMSContext;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.TextMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class HelloWorldJMSClient {
-    private static final Logger log = Logger.getLogger(HelloWorldJMSClient.class.getName());
+	private static final Logger log = Logger.getLogger(HelloWorldJMSClient.class.getName());
 
-    // Set up all the default values
-    private static final String DEFAULT_MESSAGE = "Hello, World!";
-    private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
-    private static final String DEFAULT_REQUEST_DESTINATION = "/queue/request";
-    private static final String DEFAULT_RESPONSE_DESTINATION = "queue/response";
-    private static final String DEFAULT_MESSAGE_COUNT = "1";
-    private static final String DEFAULT_USERNAME = "jmsuser";
-    private static final String DEFAULT_PASSWORD = "jmsuser@123";
-    private static final String INITIAL_CONTEXT_FACTORY = "org.jboss.naming.remote.client.InitialContextFactory";
-    private static final String PROVIDER_URL = "http-remoting://127.0.0.1:8080";
+	// Set up all the default values
+	private static final String DEFAULT_MESSAGE = "Hello, World!";
+	private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
+	private static final String DEFAULT_REQUEST_DESTINATION = "/queue/request";
+	private static final String DEFAULT_RESPONSE_DESTINATION = "/queue/response";
+	private static final String DEFAULT_MESSAGE_COUNT = "1";
+	private static final String DEFAULT_USERNAME = "jmsuser";
+	private static final String DEFAULT_PASSWORD = "jmsuser@123";
+	private static final String INITIAL_CONTEXT_FACTORY = "org.jboss.naming.remote.client.InitialContextFactory";
+	private static final String PROVIDER_URL = "http-remoting://127.0.0.1:8080";
 
-    public static void main(String[] args) {
+	public static void main(String[] args) throws JMSException {
 
-        Context namingContext = null;
+		Context namingContext = null;
 
-        try {
-            String userName = System.getProperty("username", DEFAULT_USERNAME);
-            String password = System.getProperty("password", DEFAULT_PASSWORD);
+		try {
+			String userName = System.getProperty("username", DEFAULT_USERNAME);
+			String password = System.getProperty("password", DEFAULT_PASSWORD);
 
-            // Set up the namingContext for the JNDI lookup
-            final Properties env = new Properties();
-            env.put(Context.INITIAL_CONTEXT_FACTORY, INITIAL_CONTEXT_FACTORY);
-            env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, PROVIDER_URL));
-            env.put(Context.SECURITY_PRINCIPAL, userName);
-            env.put(Context.SECURITY_CREDENTIALS, password);
-            namingContext = new InitialContext(env);
+			// Set up the namingContext for the JNDI lookup
+			final Properties env = new Properties();
+			env.put(Context.INITIAL_CONTEXT_FACTORY, INITIAL_CONTEXT_FACTORY);
+			env.put(Context.PROVIDER_URL, System.getProperty(Context.PROVIDER_URL, PROVIDER_URL));
+			env.put(Context.SECURITY_PRINCIPAL, userName);
+			env.put(Context.SECURITY_CREDENTIALS, password);
+			namingContext = new InitialContext(env);
 
-            // Perform the JNDI lookups
-            String connectionFactoryString = System.getProperty("connection.factory", DEFAULT_CONNECTION_FACTORY);
-            log.info("Attempting to acquire connection factory \"" + connectionFactoryString + "\"");
-            ConnectionFactory connectionFactory = (ConnectionFactory) namingContext.lookup(connectionFactoryString);
-            log.info("Found connection factory \"" + connectionFactoryString + "\" in JNDI");
+			// Perform the JNDI lookups
+			String connectionFactoryString = System.getProperty("connection.factory", DEFAULT_CONNECTION_FACTORY);
+			log.info("Attempting to acquire connection factory \"" + connectionFactoryString + "\"");
+			ConnectionFactory connectionFactory = (ConnectionFactory) namingContext.lookup(connectionFactoryString);
+			log.info("Found connection factory \"" + connectionFactoryString + "\" in JNDI");
 
-  
-            int count = Integer.parseInt(System.getProperty("message.count", DEFAULT_MESSAGE_COUNT));
-            String content = System.getProperty("message.content", DEFAULT_MESSAGE);
+			int count = Integer.parseInt(System.getProperty("message.count", DEFAULT_MESSAGE_COUNT));
+			String content = System.getProperty("message.content", DEFAULT_MESSAGE);
 
-            try (JMSContext context = connectionFactory.createContext(userName, password)) {
-            	
-            	String destinationRespString = System.getProperty("destination", DEFAULT_RESPONSE_DESTINATION);
-            	
-            	Destination reponseDestination = (Destination) namingContext.lookup(destinationRespString);
-            	//DEFAULT_RESPONSE_DESTINATION
-            
-            	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        		String messageId = br.readLine();
+			try (JMSContext context = connectionFactory.createContext(userName, password)) {
 
-                // Create the JMS consumer
-                JMSConsumer consumer = context.createConsumer(reponseDestination, messageId);
-                // Then receive the same number of messages that were sent
-                
-                    String text = consumer.receiveBody(String.class, 100000);
-                    log.info("Received message with content " + text);
-                
-            } catch (IOException e) {
+				String destinationRespString = System.getProperty("destination", DEFAULT_RESPONSE_DESTINATION);
+
+				Destination reponseDestination = (Destination) namingContext.lookup(destinationRespString);
+				// DEFAULT_RESPONSE_DESTINATION
+
+				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+				String messageId = br.readLine();
+				//String messageId = "d6667717";
+				
+				//String jmsId = "JMSMessageID='"+messageId+"'";
+				String jmsId = "userID like '%"+messageId+"%'";
+				//JMSMessageID = 'abc'
+
+				log.info("Selector = " + jmsId);
+				
+				// Create the JMS consumer
+				//JMSConsumer consumer = context.createConsumer(reponseDestination, jmsId);
+				JMSConsumer consumer = context.createConsumer(reponseDestination);
+				// Then receive the same number of messages that were sent
+
+				Message text = consumer.receive();
+				TextMessage tm = (TextMessage) text;
+				log.info("Received message with content " + text);
+				
+				log.info(text.getJMSMessageID());
+				log.info(tm.getText());
+
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        } catch (NamingException e) {
-            log.severe(e.getMessage());
-        } finally {
-            if (namingContext != null) {
-                try {
-                    namingContext.close();
-                } catch (NamingException e) {
-                    log.severe(e.getMessage());
-                }
-            }
-        }
-    }
+		} catch (NamingException e) {
+			log.severe(e.getMessage());
+		} finally {
+			if (namingContext != null) {
+				try {
+					namingContext.close();
+				} catch (NamingException e) {
+					log.severe(e.getMessage());
+				}
+			}
+		}
+	}
 }

@@ -55,7 +55,7 @@ public class JmsServiceImpl {
 			try {
 				Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 				try{
-					MessageConsumer consumer = session.createConsumer(responseQueue, correlationId != null ? "JMSCorrekationID='" + correlationId + "'" : null);
+					MessageConsumer consumer = session.createConsumer(responseQueue, correlationId != null ? "JMSCorrelationID='" + correlationId + "'" : null);
 					Message message = consumer.receive();
 					if (message instanceof TextMessage){
 						return ((TextMessage)message).getText();
