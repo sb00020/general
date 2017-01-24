@@ -35,8 +35,8 @@ import javax.naming.NamingException;
 import javax.jms.Connection;
 import org.jgroups.util.UUID;
 
-public class HelloWorldJMSClient {
-    private static final Logger log = Logger.getLogger(HelloWorldJMSClient.class.getName());
+public class JMSFeeder {
+    private static final Logger log = Logger.getLogger(JMSFeeder.class.getName());
 
     // Set up all the default values
     private static final String DEFAULT_MESSAGE = "Hello, World!";

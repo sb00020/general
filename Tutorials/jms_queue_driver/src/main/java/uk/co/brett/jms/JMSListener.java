@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.jms;
+package uk.co.brett.jms;
 
 import java.util.logging.Logger;
 import java.io.BufferedReader;
@@ -33,8 +33,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class HelloWorldJMSClient {
-	private static final Logger log = Logger.getLogger(HelloWorldJMSClient.class.getName());
+public class JMSListener {
+	private static final Logger log = Logger.getLogger(JMSListener.class.getName());
 
 	// Set up all the default values
 	private static final String DEFAULT_MESSAGE = "Hello, World!";
@@ -47,7 +47,7 @@ public class HelloWorldJMSClient {
 	private static final String INITIAL_CONTEXT_FACTORY = "org.jboss.naming.remote.client.InitialContextFactory";
 	private static final String PROVIDER_URL = "http-remoting://127.0.0.1:8080";
 
-	public static void main(String[] args) throws JMSException {
+	public String listen(String id) throws JMSException {
 
 		Context namingContext = null;
 
@@ -79,12 +79,10 @@ public class HelloWorldJMSClient {
 				Destination reponseDestination = (Destination) namingContext.lookup(destinationRespString);
 				// DEFAULT_RESPONSE_DESTINATION
 
-				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-				String messageId = br.readLine();
-				//String messageId = "d6667717";
+
 				
 				//String jmsId = "JMSMessageID='"+messageId+"'";
-				String jmsId = "userID like '%"+messageId+"%'";
+				String jmsId = "JMSMessageID like '%"+id+"%'";
 				//JMSMessageID = 'abc'
 
 				log.info("Selector = " + jmsId);
@@ -99,11 +97,11 @@ public class HelloWorldJMSClient {
 				log.info("Received message with content " + text);
 				
 				log.info(text.getJMSMessageID());
+				log.info(text.getJMSCorrelationID());
 				log.info(tm.getText());
+				
+				return tm.getText();
 
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		} catch (NamingException e) {
 			log.severe(e.getMessage());
@@ -116,5 +114,6 @@ public class HelloWorldJMSClient {
 				}
 			}
 		}
+		return null;
 	}
 }

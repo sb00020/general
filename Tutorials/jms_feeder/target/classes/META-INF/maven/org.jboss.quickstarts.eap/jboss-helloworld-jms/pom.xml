@@ -124,7 +124,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${version.exec.plugin}</version>
                 <configuration>
-                    <mainClass>org.jboss.as.quickstarts.jms.HelloWorldJMSClient</mainClass>
+                    <mainClass>org.jboss.as.quickstarts.jms.JMSFeeder</mainClass>
                     <systemProperties>
                         <!-- Override the default values of properties passed to the HelloWorldJMSClient -->
                         <!--
