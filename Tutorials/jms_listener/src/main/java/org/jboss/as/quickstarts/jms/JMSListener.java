@@ -84,7 +84,7 @@ public class JMSListener {
 				//String messageId = "d6667717";
 				
 				//String jmsId = "JMSMessageID='"+messageId+"'";
-				String jmsId = "JMSMessageID like '%"+messageId+"%'";
+				String jmsId = "userID like '%"+messageId+"%'";
 				//JMSMessageID = 'abc'
 
 				log.info("Selector = " + jmsId);
@@ -96,10 +96,11 @@ public class JMSListener {
 
 				Message text = consumer.receive();
 				TextMessage tm = (TextMessage) text;
+				System.out.println();
 				log.info("Received message with content " + text);
-				
+				System.out.println();
 				log.info(text.getJMSMessageID());
-				log.info(text.getJMSCorrelationID());
+				System.out.println();
 				log.info(tm.getText());
 
 			} catch (IOException e) {
