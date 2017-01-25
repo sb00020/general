@@ -70,11 +70,13 @@ public class HelloWorldQueueMDB implements MessageListener {
 				LOGGER.warning("This is magic");
 
 				addResponse(msg.getJMSMessageID());
+				
+				Thread.sleep(1000);
 
 			} else {
 				LOGGER.warning("Message of wrong type: " + rcvMessage.getClass().getName());
 			}
-		} catch (JMSException e) {
+		} catch (JMSException | InterruptedException e) {
 			throw new RuntimeException(e);
 		}
 	}
