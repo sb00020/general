@@ -1,4 +1,4 @@
-uk\co\brett\music\chord\gui\ChordApplication.class
-uk\co\brett\music\chord\gui\ChordController.class
-uk\co\brett\music\chord\gui\ChordController$1.class
-uk\co\brett\music\chord\gui\ChordController$Chords.class
+uk/co/brett/music/chord/gui/ChordController$1.class
+uk/co/brett/music/chord/gui/MasterController.class
+uk/co/brett/music/chord/gui/ChordController$Chords.class
+uk/co/brett/music/chord/gui/ChordController.class
