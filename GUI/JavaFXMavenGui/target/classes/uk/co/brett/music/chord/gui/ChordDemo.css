@@ -1,0 +1,17 @@
+/** ChordDemo.css
+    place in same directory as ChordApplication.java 
+    ensure build system copies the css file to the build output path */
+
+.layout { 
+  -fx-background-color: cornsilk;
+}
+
+#selected-chord-frame {
+  -fx-border-color: burlywood;
+  -fx-border-width: 5;
+  -fx-background-color: white;
+}
+
+.bold-label {
+  -fx-font-weight: bold;  
+}
