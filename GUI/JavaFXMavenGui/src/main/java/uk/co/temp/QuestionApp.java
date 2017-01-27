@@ -20,7 +20,7 @@ public class QuestionApp extends Application {
 		stage.setTitle("Chords");
 
 		AnchorPane layout = FXMLLoader
-				.load(new URL(QuestionApp.class.getResource("QuestionController.fxml").toExternalForm()));
+				.load(new URL(QuestionApp.class.getResource("TilePaneController.fxml").toExternalForm()));
 		stage.setScene(new Scene(layout));
 		stage.show();
 

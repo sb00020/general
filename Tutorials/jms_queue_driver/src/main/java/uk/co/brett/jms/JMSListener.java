@@ -16,11 +16,9 @@
  */
 package uk.co.brett.jms;
 
-import java.util.logging.Logger;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Enumeration;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
@@ -82,7 +80,9 @@ public class JMSListener {
 
 				
 				//String jmsId = "JMSMessageID='"+messageId+"'";
-				String jmsId = "JMSMessageID like '%"+id+"%'";
+				//String jmsId = "JMSCorrelationID like '%"+id+"%'";
+				String jmsId = "JMSCorrelationID = '"+id+"'";
+				
 				//JMSMessageID = 'abc'
 
 				log.info("Selector = " + jmsId);
@@ -93,6 +93,19 @@ public class JMSListener {
 				// Then receive the same number of messages that were sent
 
 				Message text = consumer.receive();
+				
+				StringBuilder buffer = new StringBuilder("Properties: \n");
+				Enumeration propertyNames = text.getPropertyNames();
+				while(propertyNames.hasMoreElements()) {
+					String name = (String)propertyNames.nextElement();
+					buffer.append("  ");
+					buffer.append(name);
+					buffer.append(": ");
+					buffer.append(text.getStringProperty(name));
+					buffer.append("\n");
+				}
+				log.info(buffer.toString());
+				
 				TextMessage tm = (TextMessage) text;
 				log.info("Received message with content " + text);
 				

@@ -18,6 +18,7 @@ public class JMSDriver {
 			ids[i] = feeder.feeder();
 			feeder = null;
 			System.out.println(ids[i]);
+			break;
 		}
 		
 		Thread.sleep(4000);
@@ -29,11 +30,12 @@ public class JMSDriver {
 			message[i] = listen.listen(ids[i]);
 			
 			System.out.println(message[i]);
-			
+			break;
 		}
 		
 		for (int i=0; i <10; i ++) { 
 			System.out.println(ids[i]);
+			break;
 		}
 		
 	}
