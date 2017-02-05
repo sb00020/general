@@ -31,6 +31,12 @@ import javafx.scene.control.ToggleGroup;
 		private RadioButton toggle0, toggle1, toggle2, toggle3, toggle4;
 		
 		private boolean correctAnswer = false;
+		
+		private final Question question;
+		
+		public QuestionController(Question q){
+			this.question = q;
+		}
 	
 		@Override
 		public void initialize(URL fxmlFileLocation, ResourceBundle resources) {

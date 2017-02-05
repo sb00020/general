@@ -5,7 +5,7 @@
  <display-name>Create Event Application</display-name>
  <servlet>
   <servlet-name>HelloServlet</servlet-name>
-  <servlet-class>info.gianlucacosta.jmstest.web.MyJmsServlet</servlet-class>
+  <servlet-class>uk.co.brett.datasource.test.Create100EventsSQL</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>HelloServlet</servlet-name>
