@@ -57,8 +57,8 @@ public class ImageParserMDB implements MessageListener {
 		try {
 			final Destination destination = queue;
 			LOGGER.info("Set dest");
-			String text = "Blah: " ;
-			LOGGER.info(text + "  " + (null == context));
+			String text = s;
+			//LOGGER.info(text + "  " + (null == context));
 			LOGGER.info(context.getClientID());
 
 			Message message = context.createTextMessage(text);
