@@ -1,0 +1,46 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://services.memorynotfound.com/"
+           elementFormDefault="qualified">
+
+
+    <xs:complexType name="CourseRequest">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int" nillable="false"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CourseResponse">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="created" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+
+<xs:complexType name="Works">
+    <xs:sequence>
+        <xs:element name="Work" type="Work" maxOccurs="unbounded" minOccurs="0"></xs:element>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Work">
+    <xs:sequence>
+        <xs:element name="Composers" type="Composers"></xs:element>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Composers">
+    <xs:sequence>
+        <xs:element name="Composer" type="Composer" maxOccurs="unbounded" minOccurs="0"></xs:element>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Composer">
+    <xs:sequence>
+        <xs:element name="Name" type="xs:string"></xs:element>
+    </xs:sequence>
+</xs:complexType>
+
+</xs:schema>
