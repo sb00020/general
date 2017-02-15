@@ -126,36 +126,7 @@
                 <configuration>
                     <mainClass>uk.co.brett.jms.JMSDriver</mainClass>
                     <systemProperties>
-                        <!-- Override the default values of properties passed to the HelloWorldJMSClient -->
-                        <!--
-                        <systemProperty>
-                            <key>java.naming.provider.url</key>
-                            <value>remote://localhost:8080</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <key>username</key>
-                            <value>quickstartUser</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <key>password</key>
-                            <value>quickstartPwd1!</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <key>connection.factory</key>
-                            <value>jms/RemoteConnectionFactory</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <key>destination</key>
-                            <value>jms/queue/test</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <key>message.count</key>
-                            <value>1</value>
-                        </systemProperty>
-                        <systemProperty>
-                            <key>message.content</key>
-                            <value>Hello, World!</value>
-                        </systemProperty-->
+                       
                         <systemProperty>
                             <key>java.logging.config.file</key>
                             <value>./helloworld-jms-logging.properties</value>
