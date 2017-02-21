@@ -24,7 +24,7 @@ public class Main {
 
         System.out.println("Finished: " + outputs + "\n");
 
-        Collections.sort(outputs);
+        //Collections.sort(outputs);
         
         for (OutputMessage o : outputs) {
 
@@ -42,34 +42,34 @@ public class Main {
             System.out.println( (double) (stop - start) / 1000.);
 
     }
-
-    public void splitThread() {
-        int num = 64;
-
-        for (int j = 0; j < 10; j++) {
-
-            long start = System.currentTimeMillis();
-
-            SplitThreadPool atp = new SplitThreadPool(100, num);
-
-            ArrayList<OutputMessage> outputs = (ArrayList<OutputMessage>) atp.execute(atp.createCallables());
-
-            for (OutputMessage o : outputs) {
-                Double[] dd = new Double[o.getList().length];
-                for (int i = 0; i < o.getList().length; i++) {
-                    dd[i] = o.getList()[i];
-                }
-                //    System.out.println("Thread : " + o.getThread() + " Number: " + Sorter.returnArrayAsString(dd));
-
-            }
-
-            long stop = System.currentTimeMillis();
-
-            System.out.println(num + " , " + (double) (stop - start) / 1000.);
-
-            num *= 2;
-        }
-    }
+//
+//    public void splitThread() {
+//        int num = 64;
+//
+//        for (int j = 0; j < 10; j++) {
+//
+//            long start = System.currentTimeMillis();
+//
+//            SplitThreadPool atp = new SplitThreadPool(100, num);
+//
+//            ArrayList<OutputMessage> outputs = (ArrayList<OutputMessage>) atp.execute(atp.createCallables());
+//
+//            for (OutputMessage o : outputs) {
+//                Double[] dd = new Double[o.getList().length];
+//                for (int i = 0; i < o.getList().length; i++) {
+//                    dd[i] = o.getList()[i];
+//                }
+//                //    System.out.println("Thread : " + o.getThread() + " Number: " + Sorter.returnArrayAsString(dd));
+//
+//            }
+//
+//            long stop = System.currentTimeMillis();
+//
+//            System.out.println(num + " , " + (double) (stop - start) / 1000.);
+//
+//            num *= 2;
+//        }
+//    }
 
     public void old() {
 
