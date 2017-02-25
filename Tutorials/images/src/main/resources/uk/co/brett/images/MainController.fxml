@@ -2,9 +2,11 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane minHeight="10.0" minWidth="10.0" prefHeight="612.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.co.brett.images.MainController">
 	<children>
-      <ImageView fx:id="imageHolder" fitHeight="613.0" fitWidth="643.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageHolder" fitHeight="379.0" fitWidth="643.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane fx:id="wwdPane" layoutX="208.0" layoutY="362.0" prefHeight="200.0" prefWidth="200.0" />
 	</children>
 </AnchorPane>

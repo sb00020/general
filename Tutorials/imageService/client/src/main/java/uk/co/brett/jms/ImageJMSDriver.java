@@ -19,18 +19,12 @@ public class ImageJMSDriver {
 
 		JMSFeeder feeder = new JMSFeeder();
 		ids = feeder.feeder();
-
-		//Thread.sleep(2000);
-
+		
 		JMSListener listen = new JMSListener();
 
 		message = listen.listen(ids);
 		
 		convertToImage(message);
-
-		//System.out.println(message);
-
-		//System.out.println(ids);
 
 	}
 
@@ -45,7 +39,7 @@ public class ImageJMSDriver {
 		try {
 			FileUtils.writeByteArrayToFile(new File(curDir+ "/out.png"), bytes);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
