@@ -8,21 +8,21 @@
 	<artifactId>JmsMessagingPattern</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- EAP component version management BOM -->
-        <version.jboss.bom.eap>7.0.0.GA</version.jboss.bom.eap>
+		<!-- EAP component version management BOM -->
+		<version.jboss.bom.eap>7.0.0.GA</version.jboss.bom.eap>
 
-        <!-- WildFly Maven plug-in to deploy your WAR to a local JBoss EAP container -->
-        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+		<!-- WildFly Maven plug-in to deploy your WAR to a local JBoss EAP container -->
+		<version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
 
-        <!-- other plug-in versions -->
-        <version.jar.plugin>2.2</version.jar.plugin>
-        <version.exec.plugin>1.2.1</version.exec.plugin>
+		<!-- other plug-in versions -->
+		<version.jar.plugin>2.2</version.jar.plugin>
+		<version.exec.plugin>1.2.1</version.exec.plugin>
 
-        <!-- maven-compiler-plugin -->
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
+		<!-- maven-compiler-plugin -->
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
 	<repositories>
 		<repository>
@@ -54,6 +54,14 @@
 			<artifactId>wildfly-jms-client-bom</artifactId>
 			<type>pom</type>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
