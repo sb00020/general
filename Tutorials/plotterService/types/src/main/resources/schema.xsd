@@ -1,0 +1,27 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://maths.services.brett.com/" xmlns:pls="http://maths.services.brett.com/"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xs:element name="PlotterRequest" type="pls:PlotterRequestType" />
+	<xs:element name="PlotterResponse" type="pls:PlotterResponseType" />
+
+	<xs:complexType name="PlotterRequestType">
+		<xs:sequence>
+			<xs:element name="numberOfMessages" type="xs:int"
+				nillable="false" />
+			<xs:element name="lowerLimit" type="xs:float" />
+			<xs:element name="upperLimit" type="xs:float" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PlotterResponseType">
+		<xs:sequence>
+			<xs:element name="id" type="xs:int" />
+			<xs:element name="x" type="xs:float" />
+			<xs:element name="y" type="xs:float" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+</xs:schema>

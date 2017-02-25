@@ -24,15 +24,15 @@ public abstract class AbstractThreadPool<O> {
 
     final int numThreads;
     private final int numExecutors;
-    final ExecutorService service;
+    public final ExecutorService service;
     Set<Future<O>> set = new HashSet<>();
     //Callable<OutputMessage> callable;
     ArrayList<O> outputs = new ArrayList<>();
 
-    public <I> AbstractThreadPool(int t, int e) {
+    public <I> AbstractThreadPool(int threads, int executors) {
 
-        numThreads = t;
-        numExecutors = e;
+        numThreads = threads;
+        numExecutors = executors;
 
         service = Executors.newFixedThreadPool(numExecutors);
 
@@ -62,4 +62,12 @@ public abstract class AbstractThreadPool<O> {
 
     }
 
+    public int getNumThreads(){
+    	return numThreads;
+    }
+    
+    public int getNumExecutors(){
+    	return numExecutors;
+    }
+    
 }
