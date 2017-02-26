@@ -1,4 +1,4 @@
-package uk.co.brett.maths.plotter;
+package uk.co.brett.jms.maths.plotter;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -14,8 +14,12 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 
 import com.brett.services.maths.ObjectFactory;
+import com.brett.services.maths.PlotterDriverRequestType;
+import com.brett.services.maths.PlotterDriverResponseType;
 import com.brett.services.maths.PlotterRequestType;
 import com.brett.services.maths.PlotterResponseType;
+
+
 
 public class PlotterMediator {
 
@@ -26,7 +30,8 @@ public class PlotterMediator {
 
 	static {
 		try {
-			jaxbContext = JAXBContext.newInstance(PlotterRequestType.class, PlotterResponseType.class);
+			System.out.println("Init context");
+			jaxbContext = JAXBContext.newInstance(PlotterRequestType.class, PlotterResponseType.class, PlotterDriverRequestType.class, PlotterDriverResponseType.class);
 		} catch (JAXBException e) {
 			throw new EJBException("Failed to create Context");
 		}
@@ -48,7 +53,7 @@ public class PlotterMediator {
 	}
 
 	public static String requestToXml(PlotterRequestType req) {
-
+		System.out.println("In method");
 		Writer sw = new StringWriter();
 		try {
 			Marshaller marshaller = jaxbContext.createMarshaller();
@@ -94,6 +99,69 @@ public class PlotterMediator {
 		return sw.toString();
 	}
 	
+	
+	public static PlotterDriverResponseType driverResponseFromXml(String xml) {
+
+		Unmarshaller unmarshaller;
+		JAXBElement<PlotterDriverResponseType> res = null;
+
+		try {
+			unmarshaller = jaxbContext.createUnmarshaller();
+			res= unmarshaller.unmarshal(xmlFactory.createXMLStreamReader(new StringReader(xml)), PlotterDriverResponseType.class);
+		} catch (JAXBException | XMLStreamException e) {
+			throw new EJBException("Failed to unmarshall message '" + xml + "'", e);
+		}
+
+		return res.getValue();
+	}
+	
+	
+	public static String driverReponseToXml(PlotterDriverResponseType res){
+		
+		Writer sw = new StringWriter();
+		try {
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			marshaller.marshal(objectFactory.createPlotterDriverResponse(res), sw);
+
+		} catch (JAXBException e) {
+			throw new EJBException("Failed to Marshall request", e);
+		}
+		return sw.toString();
+	}
+	
+	
+	public static PlotterDriverRequestType driverRequestFromXml(String xml) {
+
+		Unmarshaller unmarshaller;
+		JAXBElement<PlotterDriverRequestType> res = null;
+
+		try {
+			unmarshaller = jaxbContext.createUnmarshaller();
+			res= unmarshaller.unmarshal(xmlFactory.createXMLStreamReader(new StringReader(xml)), PlotterDriverRequestType.class);
+		} catch (JAXBException | XMLStreamException e) {
+			throw new EJBException("Failed to unmarshall message '" + xml + "'", e);
+		}
+
+		return res.getValue();
+	}
+	
+	
+	public static String driverRequestToXml(PlotterDriverRequestType req){
+		
+		Writer sw = new StringWriter();
+		try {
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			marshaller.marshal(objectFactory.createPlotterDriverRequest(req), sw);
+
+		} catch (JAXBException e) {
+			throw new EJBException("Failed to Marshall request", e);
+		}
+		return sw.toString();
+	}
 	
 
 }

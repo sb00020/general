@@ -21,10 +21,8 @@ import java.util.Properties;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
-import javax.jms.JMSConsumer;
 import javax.jms.Message;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.JMSProducer;
@@ -33,7 +31,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import javax.jms.Connection;
-import org.jgroups.util.UUID;
 
 public class JMSFeeder {
     private static final Logger log = Logger.getLogger(JMSFeeder.class.getName());

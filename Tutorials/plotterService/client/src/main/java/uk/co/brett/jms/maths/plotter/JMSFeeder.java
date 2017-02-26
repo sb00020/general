@@ -14,17 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.co.brett.jms;
+package uk.co.brett.jms.maths.plotter;
 
 import java.util.logging.Logger;
 import java.util.Properties;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
-import javax.jms.JMSConsumer;
 import javax.jms.Message;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.JMSProducer;
@@ -33,23 +31,22 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import javax.jms.Connection;
-import org.jgroups.util.UUID;
 
 public class JMSFeeder {
     private static final Logger log = Logger.getLogger(JMSFeeder.class.getName());
 
     // Set up all the default values
-    private static final String DEFAULT_MESSAGE = "Hello, World!";
+    //private static final String DEFAULT_MESSAGE = "Hello, World!";
     private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
-    private static final String DEFAULT_REQUEST_DESTINATION = "/queue/image/request";
-    private static final String DEFAULT_RESPONSE_DESTINATION = "/queue/image/response";
+    private static final String DEFAULT_REQUEST_DESTINATION = "/queue/maths/driver/request";
+    private static final String DEFAULT_RESPONSE_DESTINATION = "/queue/maths/driver/response";
     private static final String DEFAULT_MESSAGE_COUNT = "1";
     private static final String DEFAULT_USERNAME = "jmsuser";
     private static final String DEFAULT_PASSWORD = "jmsuser@123";
     private static final String INITIAL_CONTEXT_FACTORY = "org.jboss.naming.remote.client.InitialContextFactory";
     private static final String PROVIDER_URL = "http-remoting://127.0.0.1:8080";
 
-    public String feeder() {
+    public String feeder(String content) {
 
         Context namingContext = null;
 
@@ -77,7 +74,7 @@ public class JMSFeeder {
             log.info("Found destination \"" + destinationString + "\" in JNDI");
 
             int count = Integer.parseInt(System.getProperty("message.count", DEFAULT_MESSAGE_COUNT));
-            String content = System.getProperty("message.content", DEFAULT_MESSAGE);
+           // String content = message;
 
             try (JMSContext context = connectionFactory.createContext(userName, password)) {
             	
@@ -104,7 +101,7 @@ public class JMSFeeder {
                 producer.send(requestDestination, message);
                 String id = message.getJMSMessageID();
                 
-
+                System.out.println("The message Id is: " + message.getJMSMessageID());
                 System.out.println("The correlation Id is: " + id);
                 connection.close();
                 return id;
