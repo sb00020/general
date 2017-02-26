@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.co.brett.jms;
+package uk.co.brett.jms.maths.plotter;
 
 import java.util.Enumeration;
 import java.util.Properties;
@@ -37,8 +37,8 @@ public class JMSListener {
 	// Set up all the default values
 	private static final String DEFAULT_MESSAGE = "Hello, World!";
 	private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
-    private static final String DEFAULT_REQUEST_DESTINATION = "/queue/image/request";
-    private static final String DEFAULT_RESPONSE_DESTINATION = "/queue/image/response";
+    private static final String DEFAULT_REQUEST_DESTINATION = "/queue/maths/driver/request";
+    private static final String DEFAULT_RESPONSE_DESTINATION = "/queue/maths/driver/response";
 	private static final String DEFAULT_MESSAGE_COUNT = "1";
 	private static final String DEFAULT_USERNAME = "jmsuser";
 	private static final String DEFAULT_PASSWORD = "jmsuser@123";

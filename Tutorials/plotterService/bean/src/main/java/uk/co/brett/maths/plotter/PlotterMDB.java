@@ -14,6 +14,9 @@ import javax.jms.MessageListener;
 import javax.jms.Queue;
 import javax.jms.TextMessage;
 
+import com.brett.services.maths.PlotterRequestType;
+import com.brett.services.maths.PlotterResponseType;
+
 @MessageDriven(name = "PlotterMDB", activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:jboss/exported/queue/maths/request"),
 		@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
@@ -36,7 +39,7 @@ public class PlotterMDB implements MessageListener {
 				LOGGER.info("Received Message from queue: " + msg.getText());
 				LOGGER.info("Received Message Id: " + msg.getJMSMessageID());
 
-				addResponse(msg);
+				addResponse(callFunction(msg.getText()), msg);
 
 			} else {
 				LOGGER.warning("Message of wrong type: " + rcvMessage.getClass().getName());
@@ -46,42 +49,37 @@ public class PlotterMDB implements MessageListener {
 		}
 	}
 
-	private void addResponse(TextMessage inputMessage) {
+	private String callFunction(final String msg) {
 
-		String id = "";
-		String text = "";
-		try {
-			id = inputMessage.getJMSCorrelationID();
-			text = inputMessage.getText();
-		} catch (JMSException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		PlotterRequestType request = PlotterMediator.requestFromXml(msg);
+		PlotterResponseType response = new PlotterResponseType();
 
-		
-		
-		
+		response.setId(request.getId());
+		response.setX(request.getX());
+		response.setY((float) Function.function(request.getX()));
+		String s = PlotterMediator.responseToXml(response);
+		System.out.println(s);
+
+		return s;
+
+	}
+
+	private void addResponse(final String response, final TextMessage inputMessage) {
+
 		LOGGER.info("Adding Response");
-		
-		
-		
-		
+
 		try {
 			final Destination destination = queue;
 			LOGGER.info("Set dest");
-			
-			LOGGER.info(context.getClientID());
 
-			
-			
 			Message message = context.createTextMessage("");
 			LOGGER.info("Created Message");
 
-			message.setJMSCorrelationID(id);
-			message.setJMSMessageID(id);
+			message.setJMSCorrelationID(inputMessage.getJMSCorrelationID());
+
 			LOGGER.info("Sending Response Message Id: " + message.getJMSCorrelationID());
 
-			context.createProducer().send(destination, text);
+			context.createProducer().send(destination, response);
 			LOGGER.info("Sent Response Message Id: " + message.getJMSCorrelationID());
 
 		} catch (JMSException e) {

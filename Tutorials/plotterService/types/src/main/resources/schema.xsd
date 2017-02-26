@@ -4,8 +4,10 @@
 
 	<xs:element name="PlotterRequest" type="pls:PlotterRequestType" />
 	<xs:element name="PlotterResponse" type="pls:PlotterResponseType" />
+	<xs:element name="PlotterDriverRequest" type="pls:PlotterDriverRequestType" />
+	<xs:element name="PlotterDriverResponse" type="pls:PlotterDriverResponseType" />
 
-	<xs:complexType name="PlotterRequestType">
+	<xs:complexType name="PlotterDriverRequestType">
 		<xs:sequence>
 			<xs:element name="numberOfMessages" type="xs:int"
 				nillable="false" />
@@ -13,6 +15,20 @@
 			<xs:element name="upperLimit" type="xs:float" />
 		</xs:sequence>
 	</xs:complexType>
+
+	<xs:complexType name="PlotterDriverResponseType">
+		<xs:sequence>
+			<xs:element name="numberOfMessages" type="xs:int" nillable="false" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PlotterRequestType">
+		<xs:sequence>
+			<xs:element name="id" type="xs:int" />
+			<xs:element name="x" type="xs:float" />
+		</xs:sequence>
+	</xs:complexType>
+
 
 	<xs:complexType name="PlotterResponseType">
 		<xs:sequence>

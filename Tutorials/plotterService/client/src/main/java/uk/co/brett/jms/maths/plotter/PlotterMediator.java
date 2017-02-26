@@ -1,4 +1,4 @@
-package uk.co.brett.maths.plotter;
+package uk.co.brett.jms.maths.plotter;
 
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -116,7 +116,7 @@ public class PlotterMediator {
 	}
 	
 	
-	public static String reponseToXml(PlotterDriverResponseType res){
+	public static String driverReponseToXml(PlotterDriverResponseType res){
 		
 		Writer sw = new StringWriter();
 		try {
@@ -148,7 +148,7 @@ public class PlotterMediator {
 	}
 	
 	
-	public static String reponseToXml(PlotterDriverRequestType req){
+	public static String driverRequestToXml(PlotterDriverRequestType req){
 		
 		Writer sw = new StringWriter();
 		try {

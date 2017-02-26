@@ -2,23 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-    <groupId>uk.co.brett.math.plotter</groupId>
-    <artifactId>plotter-client</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+	<groupId>uk.co.brett.math.plotter</groupId>
+	<artifactId>plotter-client</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<packaging>jar</packaging>
-	<repositories>
-		<repository>
-			<id>jboss-enterprise-maven-repository</id>
-			<url>https://maven.repository.redhat.com/ga/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>jboss-enterprise-maven-repository</id>
@@ -70,6 +59,35 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
+		<!-- Import the Servlet API, we use provided scope as the API is included 
+			in JBoss EAP -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.1_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.jms</groupId>
+			<artifactId>jboss-jms-api_2.0_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>uk.co.brett.math.plotter</groupId>
+			<artifactId>plotter-types</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
