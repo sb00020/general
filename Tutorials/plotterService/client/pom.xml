@@ -98,7 +98,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>${version.exec.plugin}</version>
 				<configuration>
-					<mainClass>uk.co.brett.jms.JMSDriver</mainClass>
+					<mainClass>uk.co.brett.jms.maths.plotter.PlotterJMSDriver</mainClass>
 					<systemProperties>
 						<systemProperty>
 							<key>java.logging.config.file</key>
@@ -106,6 +106,34 @@
 						</systemProperty>
 					</systemProperties>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<!-- get all project dependencies -->
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<!-- MainClass in mainfest make a executable jar -->
+					<archive>
+						<manifest>
+							<mainClass>uk.co.brett.jms.maths.plotter.PlotterJMSDriver</mainClass>
+						</manifest>
+					</archive>
+
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<!-- bind to the packaging phase -->
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
