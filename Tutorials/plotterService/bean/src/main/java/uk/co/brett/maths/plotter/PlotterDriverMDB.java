@@ -30,7 +30,7 @@ public class PlotterDriverMDB implements MessageListener {
 	@Resource(lookup = "java:jboss/exported/queue/maths/driver/response")
 	private Queue queue;
 
-	@Resource(lookup = "java:jboss/exported/queue/maths/response")
+	@Resource(lookup = "java:jboss/exported/queue/maths/request")
 	private Queue subQueue;
 
 	@Inject
@@ -115,13 +115,9 @@ public class PlotterDriverMDB implements MessageListener {
 	private void addRequests(ArrayList<PlotterRequestType> requests, String messageId) {
 
 		for (PlotterRequestType p : requests) {
-
-			PlotterResponseType prt = new PlotterResponseType();
-			prt.setX(p.getX());
-			prt.setY((float) Function.function(p.getX()));
-			prt.setId(p.getId());
-			String response = PlotterMediator.responseToXml(prt);
-
+			
+			String request = PlotterMediator.requestToXml(p);
+			
 			try {
 				final Destination destination = subQueue;
 				LOGGER.info("Set dest");
@@ -133,7 +129,7 @@ public class PlotterDriverMDB implements MessageListener {
 
 				LOGGER.info("Sending Response Message Id: " + message.getJMSCorrelationID());
 
-				context.createProducer().send(destination, response);
+				context.createProducer().send(destination, request);
 				LOGGER.info("Sent Response Message Id: " + message.getJMSCorrelationID());
 
 			} catch (JMSException e) {
@@ -143,6 +139,29 @@ public class PlotterDriverMDB implements MessageListener {
 
 		}
 
+	}
+	
+	public void addRequest(String messageId, String response){
+		
+		try {
+			final Destination destination = subQueue;
+			LOGGER.info("Set dest");
+
+			Message message = context.createTextMessage("");
+			LOGGER.info("Created Message");
+
+			message.setJMSCorrelationID(messageId);
+
+			LOGGER.info("Sending Response Message Id: " + message.getJMSCorrelationID());
+
+			context.createProducer().send(destination, response);
+			LOGGER.info("Sent Response Message Id: " + message.getJMSCorrelationID());
+
+		} catch (JMSException e) {
+
+			e.printStackTrace();
+		}
+		
 	}
 
 	private void addResponse(final String response, final TextMessage inputMessage) {

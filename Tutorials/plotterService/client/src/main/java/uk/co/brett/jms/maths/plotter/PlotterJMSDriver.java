@@ -5,15 +5,12 @@ import java.util.ArrayList;
 import javax.jms.JMSException;
 
 import com.brett.services.maths.PlotterDriverRequestType;
-import com.brett.services.maths.PlotterDriverResponseType;
-import com.brett.services.maths.PlotterRequestType;
-import com.brett.services.maths.PlotterResponseType;
 
 public class PlotterJMSDriver {
 
-	public static void main(String... args) throws InterruptedException, JMSException {
+	public void driver() throws InterruptedException, JMSException {
 
-		int num = 50;
+		int num = 20;
 
 		System.out.println("Hello World");
 
@@ -30,48 +27,26 @@ public class PlotterJMSDriver {
 
 		JMSListener listener = new JMSListener();
 
+		String t;
+
 		// for (int i = 0; i < num; i++) {
-		String t = listener.listen(ids);
+		t = listener.listen(ids);
 
 		System.out.println(t);
 		System.out.println(ids);
 		// }
 
 		ArrayList<String> responses = new ArrayList<String>();
-		
+
 		JMSListener2 listener2 = new JMSListener2();
 		for (int i = 0; i < num; i++) {
 			t = listener2.listen(ids);
 			responses.add(t);
+			
+			
 			System.out.println(t);
 		}
 
-		System.out.println("\n\n\n");
-		
-		for (String s: responses){
-			System.out.println(s);
-			
-		}
-		
-		
-		// PlotterRequestType request = new PlotterRequestType();
-		//
-		// request.setId(0);
-		// request.setX(1.f);
-		//
-		// String content = PlotterMediator.requestToXml(request);
-		//
-		//// JMSFeeder feeder = new JMSFeeder();
-		//// String ids = feeder.feeder(content);
-		////
-		//// System.out.println("Expected id: " + ids);
-		////
-		//// JMSListener listener = new JMSListener();
-		////
-		////
-		//// String t = listener.listen(ids);
-		//
-		// System.out.println(content);
 
 	}
 

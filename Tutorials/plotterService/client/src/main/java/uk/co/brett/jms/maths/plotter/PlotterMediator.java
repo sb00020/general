@@ -21,6 +21,7 @@ import com.brett.services.maths.PlotterResponseType;
 
 
 
+
 public class PlotterMediator {
 
 	private static final XMLInputFactory xmlFactory = XMLInputFactory.newFactory();
