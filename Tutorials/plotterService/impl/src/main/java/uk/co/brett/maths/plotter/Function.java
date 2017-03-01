@@ -19,7 +19,7 @@ public class Function {
 			e.printStackTrace();
 		}
 		
-		return 10 * Math.sin(2*x) * Math.exp(-0.1 * x);;
+		return 10 * Math.sin(2*x) * Math.exp(-0.1 * x);
 		
 	}
 
