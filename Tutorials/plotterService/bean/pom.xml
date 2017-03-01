@@ -57,11 +57,11 @@
 	<dependencies>
 		<!-- Import the Servlet API, we use provided scope as the API is included 
 			in JBoss EAP -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.servlet</groupId>
-			<artifactId>jboss-servlet-api_3.1_spec</artifactId>
-			<scope>provided</scope>
-		</dependency>
+<dependency>
+    <groupId>org.jboss.spec.javax.servlet</groupId>
+    <artifactId>jboss-servlet-api_3.1_spec</artifactId>
+    <version>1.0.0.Final</version>
+</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.jms</groupId>
 			<artifactId>jboss-jms-api_2.0_spec</artifactId>
@@ -96,11 +96,6 @@
 			<groupId>uk.co.brett.math.plotter</groupId>
 			<artifactId>plotter-impl</artifactId>
 			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>uk.co.brett.math.plotter</groupId>
-			<artifactId>plotter-types</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>

@@ -35,7 +35,7 @@ public class WorkingPlotter extends Application {
     private AddToQueue addToQueue;
     private Timeline timeline2;
     private NumberAxis xAxis;
-
+    MyTimer timer;
     private void init(Stage primaryStage) {
         xAxis = new NumberAxis(0,MAX_DATA_POINTS,MAX_DATA_POINTS/10);
         xAxis.setForceZeroInRange(true);
@@ -76,8 +76,11 @@ public class WorkingPlotter extends Application {
         
         addToQueue = new AddToQueue();
         executor.execute(addToQueue);
-        //-- Prepare Timeline
-        prepareTimeline();
+        
+         timer = new MyTimer();
+        timer.start();
+        
+        
     }
 
     public static void main(String[] args) {
@@ -97,16 +100,6 @@ public class WorkingPlotter extends Application {
         }
     }
 
-    //-- Timeline gets called in the JavaFX Main thread
-    private void prepareTimeline() {
-        // Every frame to take any data from queue and add to chart
-        new AnimationTimer() {
-            @Override public void handle(long now) {
-                addDataToSeries();
-            }
-        }.start();
-    }
-
     private void addDataToSeries() {
         for (int i = 0; i < 20; i++) { //-- add 20 numbers to the plot+
             if (dataQ.isEmpty()) break;
@@ -120,8 +113,21 @@ public class WorkingPlotter extends Application {
         
         
         if (series.getData().size() > 50){
-        	this.executor.shutdown();
+        	timer.stop();
         }
         
     }
+    private class MyTimer extends AnimationTimer {
+
+        @Override
+        public void handle(long now) {
+        
+        	addDataToSeries();
+        }
+
+
+        
+    }
+    
+    
 }
