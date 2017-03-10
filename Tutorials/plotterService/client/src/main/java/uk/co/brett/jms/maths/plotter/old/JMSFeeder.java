@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.co.brett.jms.maths.plotter;
+package uk.co.brett.jms.maths.plotter.old;
 
 import java.util.logging.Logger;
 import java.util.Properties;

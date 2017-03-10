@@ -7,9 +7,6 @@
         <dependent-module archiveName="plotter-types-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/plotter-types/plotter-types">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="plotter-impl-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/plotter-impl/plotter-impl">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="java-output-path" value="/imageservice/target/classes"/>
         <property name="context-root" value="plotter-bean"/>
     </wb-module>
