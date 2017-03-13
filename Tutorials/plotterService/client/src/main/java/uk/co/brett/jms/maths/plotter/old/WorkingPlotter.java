@@ -1,4 +1,4 @@
-package uk.co.brett.jms.maths.plotter;
+package uk.co.brett.jms.maths.plotter.old;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;

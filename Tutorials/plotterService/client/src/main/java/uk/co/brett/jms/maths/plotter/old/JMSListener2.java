@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.co.brett.jms.maths.plotter;
+package uk.co.brett.jms.maths.plotter.old;
 
 import java.util.Enumeration;
 import java.util.Properties;
@@ -31,14 +31,14 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public class JMSListener {
-	private static final Logger log = Logger.getLogger(JMSListener.class.getName());
+public class JMSListener2 {
+	private static final Logger log = Logger.getLogger(JMSListener2.class.getName());
 
 	// Set up all the default values
 	private static final String DEFAULT_MESSAGE = "Hello, World!";
 	private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
-    private static final String DEFAULT_REQUEST_DESTINATION = "/queue/maths/driver/request";
-    private static final String DEFAULT_RESPONSE_DESTINATION = "/queue/maths/driver/response";
+    private static final String DEFAULT_REQUEST_DESTINATION = "/queue/maths/request";
+    private static final String DEFAULT_RESPONSE_DESTINATION = "/queue/maths/response";
 	private static final String DEFAULT_MESSAGE_COUNT = "1";
 	private static final String DEFAULT_USERNAME = "jmsuser";
 	private static final String DEFAULT_PASSWORD = "jmsuser@123";
@@ -90,19 +90,7 @@ public class JMSListener {
 				Message text = consumer.receive();
 				log.info("Receiving");
 				
-				
-				StringBuilder buffer = new StringBuilder("Properties: \n");
-				Enumeration propertyNames = text.getPropertyNames();
-				while(propertyNames.hasMoreElements()) {
-					String name = (String)propertyNames.nextElement();
-					buffer.append("  ");
-					buffer.append(name);
-					buffer.append(": ");
-					buffer.append(text.getStringProperty(name));
-					buffer.append("\n");
-				}
-				log.info(buffer.toString());
-				
+
 				TextMessage tm = (TextMessage) text;
 				log.info("Received message with content " + text);
 				

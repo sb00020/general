@@ -14,7 +14,7 @@ public class Function {
 		log.info("Entered Function, x = " + x);
 		
 		try {
-			Thread.sleep((long)(5000*rnd.nextDouble()));
+			Thread.sleep((long)(50*rnd.nextDouble()));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

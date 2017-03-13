@@ -1,4 +1,4 @@
-package uk.co.brett.jms.maths.plotter.temp;
+package uk.co.brett.jms.maths.plotter;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
@@ -6,6 +6,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.brett.services.maths.PlotterDriverRequestType;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,9 +18,12 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.stage.Stage;
+import uk.co.brett.jms.maths.plotter.driver.DriverRequest;
+import uk.co.brett.jms.maths.plotter.jms.JMSListener;
+import uk.co.brett.jms.maths.plotter.jms.MockJMSListenerImpl;
 import uk.co.brett.jms.maths.plotter.utils.XYPoint;
 
-public class XYPlotter extends Application {
+public class Main extends Application {
 	private AddToQueue addToQueue;
 	private Series<Number, Number> seriesb;
 	private MyTimer timer = new MyTimer();
@@ -26,7 +32,7 @@ public class XYPlotter extends Application {
 	
 	private static final int MAX_POINTS=500;
 	private static final int MAX_DELAY=100; //ms
-	private static final int MAX_X = 20;
+
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -36,7 +42,11 @@ public class XYPlotter extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		init(primaryStage);
 		primaryStage.show();
-
+		
+		DriverRequest driver = new DriverRequest(new PlotterDriverRequestType());
+		
+		
+		
 		// -- Prepare Executor Services
 		executor = Executors.newCachedThreadPool(new ThreadFactory() {
 			@Override
@@ -80,9 +90,7 @@ public class XYPlotter extends Application {
 		stage.show();
 	}
 
-	private double function(double x) {
-		return 10 * Math.sin(2*x) * Math.exp(-0.1 * x);
-	}
+
 
 	private void addDataToSeries() {
 		for (int i = 0; i < 20; i++) { // -- add 20 numbers to the plot+
@@ -104,15 +112,15 @@ public class XYPlotter extends Application {
 	private class AddToQueue implements Runnable {
 		public void run() {
 			try {
-				XYPoint p = new XYPoint();
-				p.setX(Math.random() * MAX_X);
-				p.setY(function(p.getX()));
+				String queueName = ""; 
+				JMSListener listener = new MockJMSListenerImpl(queueName);
+				XYPoint p = (XYPoint) listener.listen();
 				data.add(p);
 
 				Thread.sleep((long)(MAX_DELAY*Math.random()));
 				executor.execute(this);
 			} catch (InterruptedException ex) {
-				Logger.getLogger(XYPlotter.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
 	}
