@@ -14,3 +14,9 @@
 *.prefs
 
 Tutorials/imageService/client/out.png
+
+Tutorials/plotterService/bean/.settings/org.eclipse.wst.common.component
+
+GUI/JavaFXMavenGui/target/classes/META-INF/MANIFEST.MF
+
+GUI/JavaFXMavenGui/target/classes/META-INF/MANIFEST.MF
