@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+	<groupId>uk.co.trickster</groupId> 
+	<artifactId>webservice-blah-ear</artifactId>  
+	<version>1.0-SNAPSHOT</version>
+  	<packaging>ear</packaging>
+
+  	<parent>
+		<groupId>uk.co.trickster</groupId> 
+		<artifactId>webservice-blah</artifactId>  
+		<version>1.0-SNAPSHOT</version>
+  	</parent>
+  	
+
+	<properties>
+		<project.build.artifactDirectory>${project.build.directory}</project.build.artifactDirectory>
+		<project.build.artifactFile>${project.build.artifactDirectory}/${project.build.filename}.ear</project.build.artifactFile>		
+	</properties>	 
+  	
+  	
+	<dependencies>
+        <!--dependency>
+            <groupId>uk.co.trickster</groupId>
+            <artifactId>webservice-blah-mdb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+			<type>ejb</type>
+        </dependency-->
+        <dependency>
+            <groupId>uk.co.trickster</groupId>
+            <artifactId>webservice-blah-ws</artifactId>
+            <version>1.0-SNAPSHOT</version>
+			<type>war</type>
+        </dependency>
+		<!-- Skinny War -->
+        <dependency>
+            <groupId>uk.co.trickster</groupId>
+            <artifactId>webservice-blah-ws</artifactId>
+            <version>1.0-SNAPSHOT</version>
+			<type>pom</type>
+        </dependency>
+    </dependencies>
+  	
+  	<build>
+	  	<plugins>
+  	  		<plugin>
+				<artifactId>maven-ear-plugin</artifactId>  
+				<version>2.5</version>
+				<configuration>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+				</configuration>				
+  		  	</plugin>
+  	  		<!--plugin>
+  	  			<groupId>com.oracle.weblogic</groupId>
+				<artifactId>weblogic-maven-plugin</artifactId>  
+				<version>10.3.4</version>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>redeploy</goal>
+						</goals>
+						<configuration>
+							<name>${project.artifactId}</name>
+							<source>${project.build.artifactFile}</source>
+						</configuration>	
+					</execution>
+					<execution>
+						<id>deploy</id>
+						<phase>none</phase>
+					</execution>
+				</executions>			
+  		  	</plugin-->  		  	
+  		</plugins>
+		
+  	</build>
+ 
+</project>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+   	<parent>
+		<groupId>uk.co.trickster</groupId> 
+		<artifactId>webservice-blah</artifactId>  
+		<version>1.0-SNAPSHOT</version>
+  	</parent>  
+	<groupId>uk.co.trickster</groupId> 
+	<artifactId>webservice-blah-types</artifactId>  
+	<version>1.0-SNAPSHOT</version>
+  	<!--packaging>pom</packaging-->
+  	
+ 	<properties>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+		<jaxws.wsimport.genJWS>false</jaxws.wsimport.genJWS>
+	</properties>
+  	
+  	
+  	<build>
+  		<plugins>
+  		  	<plugin>
+  				<groupId>com.google.code.maven-replacer-plugin</groupId> 
+				<artifactId>replacer</artifactId>  
+				<version>1.5.2</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>		
+				<configuration>				
+					<basedir>${project.basedir}</basedir>
+					<filesToInclude>**/*.xsd,**/*.xjb,**/*.wsdl</filesToInclude>
+					<outputBaseDir>target/replaced</outputBaseDir>
+					<outputDir>target/replaced</outputDir>
+					<replacements>
+						<replacement>
+							<token>oramds:///apps/XMLModel</token>
+							<value>../</value>
+						</replacement>
+					</replacements>
+				</configuration>				
+  		  	</plugin> 
+			<plugin>
+				<groupId>org.jvnet.jax-ws-commons</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>  
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>wsimport</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+				<!-- This argument is required for Java8 due to security changes -->
+				     <vmArgs>
+						<vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+					</vmArgs>
+					<bindingDirectory>${project.basedir}/target/replaced/src/main/xjb</bindingDirectory>
+					<bindingFiles>
+						<bindingFile>Template_Types.xjb</bindingFile>
+						<bindingFile>Template_Service.xjb</bindingFile>
+					</bindingFiles>
+					<wsdlDirectory>${project.basedir}/target/replaced/src/main/wsdl/Services/TemplateService</wsdlDirectory>
+					<extension>true</extension>
+					<genJWS>${jaxws.wsimport.genJWS}</genJWS>
+					<implDestDir>${project.build.directory}/generated-sources/wsimport-impl</implDestDir>
+					<target>2.1</target>
+				</configuration>
+			</plugin>
+		  		
+		  		
+  		</plugins>  	
+  	</build> 
+</project>
