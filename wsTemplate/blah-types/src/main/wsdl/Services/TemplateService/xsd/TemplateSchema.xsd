@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:types="http://uk.co.trickster/xmlmodel/template/types"
+	targetNamespace="http://uk.co.trickster/xmlmodel/template/types"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xsd:element name="getRequestMessage" type="types:GetRequestMessage"/>
+	<xsd:element name="getResponseMessage" type="types:GetResponseMessage"/>
+
+	<xsd:element name="myString" type="xsd:string"/>
+
+	<xsd:complexType name="GetRequestMessage">
+		<xsd:sequence>
+			<xsd:element ref="types:myString" minOccurs="1"	maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="GetResponseMessage">
+		<xsd:sequence>
+			<xsd:element ref="types:myString" minOccurs="1"	maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

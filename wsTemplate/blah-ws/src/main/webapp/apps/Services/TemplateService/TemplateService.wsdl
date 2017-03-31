@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions name="TemplateService"
+	targetNamespace="http://uk.co.trickster/xmlmodel/templateService"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:client="http://uk.co.trickster/xmlmodel/templateService"
+	xmlns:types="http://uk.co.trickster/xmlmodel/template/types" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap">
+
+	<wsdl:types>
+		<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://uk.co.trickster/xmlmodel/template/types">
+			<xsd:include schemaLocation="xsd/TemplateSchema.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="GetTemplateRequestMessage">
+		<wsdl:part name="payload" element="types:getRequestMessage"/>
+	</wsdl:message>
+	<wsdl:message name="GetTemplateResponseMessage">
+		<wsdl:part name="payload" element="types:getResponseMessage"/>
+	</wsdl:message>
+
+	<wsdl:portType name="TemplateServicePortType">
+		<wsdl:operation name="getTemplate">
+			<wsdl:input message="client:GetTemplateRequestMessage"/>
+			<wsdl:output message="client:GetTemplateResponseMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="TemplateServiceSoapBinding" type="client:TemplateServicePortType">
+		<soap12:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getTemplate">
+			<soap12:operation soapAction="getTemplate" style="document"/>
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="TemplateService">
+		<wsdl:port name="TemplateServicePortType" binding="client:TemplateServiceSoapBinding">
+			<soap12:address
+				location="http://localhost:8080/TemplateService/TemplateService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

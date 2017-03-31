@@ -1,12 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>uk.co.brett.math.plotter</groupId>
-	<artifactId>plotter-client</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<name>${project.artifactId}</name>
-	<packaging>jar</packaging>
+
+	<groupId>uk.co.trickster</groupId> 
+	<artifactId>webservice-blah-mdb</artifactId>  
+	<version>1.0-SNAPSHOT</version>
+	<packaging>ejb</packaging>
+
+	<parent>
+		<groupId>uk.co.trickster</groupId>
+		<artifactId>webservice-blah</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
     <repositories>
         <repository>
             <id>jboss-enterprise-maven-repository</id>
@@ -32,7 +37,6 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.jboss.bom.eap>7.0.0.GA</version.jboss.bom.eap>
@@ -61,98 +65,73 @@
         </dependencies>
     </dependencyManagement>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.jboss.eap</groupId>
-            <artifactId>wildfly-jms-client-bom</artifactId>
-            <type>pom</type>
-        </dependency>
+
+	<dependencies>
+
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.5</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.1_spec</artifactId>
+			<version>1.0.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.jms</groupId>
 			<artifactId>jboss-jms-api_2.0_spec</artifactId>
-			<version>1.0.0.Final</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.ejb</groupId>
 			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
-			<version>1.0.0.Final</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>uk.co.brett.math.plotter</groupId>
-			<artifactId>plotter-types</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
+		<!--dependency>
+    		<groupId>com.oracle.modules</groupId>
+    		<artifactId>javax-ejb</artifactId>
+    		<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+        <dependency>
+    		<groupId>com.oracle.modules</groupId>
+    		<artifactId>com.bea.core.weblogic.workmanager</artifactId>
+    		<version>12.2.1-0-0</version>
+			<scope>provided</scope>
+		</dependency>				
+        <dependency>
+    		<groupId>com.oracle.modules</groupId>
+    		<artifactId>glassfish.jaxb</artifactId>
+    		<version>1.0.0.0-2-1-14</version>
+			<scope>provided</scope>
+		</dependency>
+        <dependency>
+    		<groupId>com.oracle.weblogic</groupId>
+    		<artifactId>wlfullclient</artifactId>
+    		<version>10.3.6</version>
+			<scope>test</scope>
+		</dependency-->		
 	</dependencies>
 
-
-	
 	<build>
-		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>${version.exec.plugin}</version>
-				<configuration>
-					<mainClass>uk.co.brett.jms.maths.plotter.PlotterJMSDriver</mainClass>
-					<systemProperties>
-						<systemProperty>
-							<key>java.logging.config.file</key>
-							<value>./helloworld-jms-logging.properties</value>
-						</systemProperty>
-					</systemProperties>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4.1</version>
-				<configuration>
-					<!-- get all project dependencies -->
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<!-- MainClass in mainfest make a executable jar -->
-					<archive>
-						<manifest>
-							<mainClass>uk.co.brett.jms.maths.plotter.PlotterJMSDriver</mainClass>
-						</manifest>
-					</archive>
 
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<!-- bind to the packaging phase -->
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>${version.jar.plugin}</version>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<version>2.3</version>
 				<configuration>
+					<ejbVersion>3.0</ejbVersion>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.wildfly.plugins</groupId>
-				<artifactId>wildfly-maven-plugin</artifactId>
-				<version>${version.wildfly.maven.plugin}</version>
+
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.13</version>
+				<configuration>
+					<exclude>**/*IntTest.java</exclude>
+				</configuration>
 			</plugin>
 		</plugins>
-	</build>
+	</build> 
 </project>

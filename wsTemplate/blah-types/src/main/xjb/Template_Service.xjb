@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxws:bindings xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
+				xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				wsdlLocation="../wsdl/Services/TemplateService/TemplateService.wsdl"
+				version="2.0">
+
+	<jaxws:bindings node="wsdl:definitions" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+		<jaxws:package name="uk.co.trickster.webservice"/>
+	</jaxws:bindings>
+
+</jaxws:bindings>

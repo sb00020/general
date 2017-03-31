@@ -43,7 +43,7 @@ public class Main extends Application {
 		init(primaryStage);
 		primaryStage.show();
 		
-		DriverRequest driver = new DriverRequest(new PlotterDriverRequestType());
+		//DriverRequest driver = new DriverRequest(new PlotterDriverRequestType());
 		
 		
 		
