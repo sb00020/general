@@ -12,12 +12,17 @@ import uk.co.trickster.services.template.message.GetResponseMessage;
 import uk.co.trickster.webservice.TemplateServicePortType;
 
 @MTOM
-@WebService(portName = "MyServiceWebServicePort", serviceName = "MyServiceWebService", targetNamespace = "http://trickster.co.uk/services/TemplateService", wsdlLocation = "apps/Services/MyService.wsdl", endpointInterface = "uk.co.trickster.webservice.TemplateServicePortType")
-@BindingType("http://www.w3.org/2003/05/soap/binding/HTTP/")
+@WebService(portName = "TemplateServicePortType", 
+serviceName = "TemplateService", 
+targetNamespace = "http://uk.co.trickster/xmlmodel/templateService", 
+wsdlLocation = "apps/Services/TemplateService/TemplateService.wsdl", 
+endpointInterface = "uk.co.trickster.webservice.TemplateServicePortType")
+
+@BindingType("http://www.w3.org/2003/05/soap/bindings/HTTP/")
 
 public class WebServicePortImpl implements TemplateServicePortType {
 
-	@Resource(mappedName = "jdbc/TricksterGlobalDataSource")
+	@Resource(mappedName = "java:/MySqlDS")
 	private DataSource dataSource;
 
 	private WebServicePortDelegate delegate;
