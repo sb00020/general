@@ -1,0 +1,37 @@
+package uk.co.generic;
+
+public class Triple {
+
+	private double x,y,z;
+
+	public Triple (double inX, double inY, double inZ){
+		x = inX;
+		y = inY;
+		z = inZ;
+	}
+	
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	public double getZ() {
+		return z;
+	}
+
+	public void setZ(double z) {
+		this.z = z;
+	}
+	
+}
