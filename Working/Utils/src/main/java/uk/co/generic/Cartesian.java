@@ -27,4 +27,18 @@ public class Cartesian extends Triple {
 
 		return new Cartesian(x, y, z);
 	}
+	
+	
+	public String toString(){
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("--------------------\n");
+		sb.append("x = " + this.getX());
+		sb.append("\ny = " + this.getY());
+		sb.append("\nz = " + this.getZ());
+		sb.append("\n--------------------");
+		return sb.toString();
+		
+	}
+	
 }
