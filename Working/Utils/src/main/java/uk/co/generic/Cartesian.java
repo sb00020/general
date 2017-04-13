@@ -28,6 +28,25 @@ public class Cartesian extends Triple {
 		return new Cartesian(x, y, z);
 	}
 	
+	public static Cartesian substract(Cartesian c1, Cartesian c2){
+		
+		double x,y,z;
+		x = c1.getX() - c2.getX();
+		y = c1.getY() - c2.getY();
+		z = c1.getZ() - c2.getZ();
+		
+		return new Cartesian(x,y,z);
+	}
+	
+	public static Cartesian scalarDivide(Cartesian c1, double d){
+		
+		double x,y,z;
+		x = c1.getX() / d;
+		y = c1.getY() / d;
+		z = c1.getZ() / d;
+		
+		return new Cartesian(x,y,z);
+	}
 	
 	public String toString(){
 		
@@ -40,5 +59,8 @@ public class Cartesian extends Triple {
 		return sb.toString();
 		
 	}
+	
+	
+	
 	
 }
