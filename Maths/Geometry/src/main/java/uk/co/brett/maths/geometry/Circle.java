@@ -31,5 +31,16 @@ public class Circle extends Shape {
 	public double getArea() {
 		return Math.PI * radius * radius;
 	}
+	
+	public Line getTangent(Point p){
+		// gradient to point
+		double mp = p.getY() / p.getX();
+		double tanM = -1d/mp;
+		double tanC = p.getY() - tanM*p.getX();
+
+		return new Line(tanM, tanC);
+
+	}
+	
 
 }
