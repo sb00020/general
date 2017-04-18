@@ -3,6 +3,14 @@ package uk.co.brett.maths.geometry;
 public class Pair {
 	private double p1, p2;
 
+	public Pair(){
+	}
+	
+	public Pair(double q1, double q2){
+		p1 = q1;
+		p2 = q2;
+	}
+	
 	public double getP1() {
 		return p1;
 	}
