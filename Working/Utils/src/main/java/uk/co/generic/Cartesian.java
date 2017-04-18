@@ -4,7 +4,6 @@ public class Cartesian extends Triple {
 
 	public Cartesian(double inX, double inY, double inZ) {
 		super(inX, inY, inZ);
-		// TODO Auto-generated constructor stub
 	}
 
 	public static Cartesian createCartesian(double lat, double lon, double alt) {
@@ -15,7 +14,7 @@ public class Cartesian extends Triple {
 
 		return new Cartesian(x, y, z);
 	}
-	
+
 	public static Cartesian createCartesian(LatLon ll) {
 		double lat = ll.getX();
 		double lon = ll.getY();
@@ -27,29 +26,49 @@ public class Cartesian extends Triple {
 
 		return new Cartesian(x, y, z);
 	}
+
+	public static Cartesian add(Cartesian c1, Cartesian c2) {
+
+		double x, y, z;
+		x = c1.getX() + c2.getX();
+		y = c1.getY() + c2.getY();
+		z = c1.getZ() + c2.getZ();
+
+		return new Cartesian(x, y, z);
+	}
 	
-	public static Cartesian substract(Cartesian c1, Cartesian c2){
-		
-		double x,y,z;
+	public static Cartesian substract(Cartesian c1, Cartesian c2) {
+
+		double x, y, z;
 		x = c1.getX() - c2.getX();
 		y = c1.getY() - c2.getY();
 		z = c1.getZ() - c2.getZ();
-		
-		return new Cartesian(x,y,z);
+
+		return new Cartesian(x, y, z);
 	}
-	
-	public static Cartesian scalarDivide(Cartesian c1, double d){
-		
-		double x,y,z;
+
+	public static Cartesian scalarDivide(Cartesian c1, double d) {
+
+		double x, y, z;
 		x = c1.getX() / d;
 		y = c1.getY() / d;
 		z = c1.getZ() / d;
-		
-		return new Cartesian(x,y,z);
+
+		return new Cartesian(x, y, z);
 	}
 	
-	public String toString(){
-		
+	public static Cartesian scalarMulitply(Cartesian c1, double d) {
+
+		double x, y, z;
+		x = c1.getX() * d;
+		y = c1.getY() * d;
+		z = c1.getZ() * d;
+
+		return new Cartesian(x, y, z);
+	}
+
+	public String toString() {
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("--------------------\n");
 		sb.append("x = " + this.getX());
@@ -57,10 +76,7 @@ public class Cartesian extends Triple {
 		sb.append("\nz = " + this.getZ());
 		sb.append("\n--------------------");
 		return sb.toString();
-		
+
 	}
-	
-	
-	
-	
+
 }

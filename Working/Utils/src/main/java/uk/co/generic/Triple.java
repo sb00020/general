@@ -1,9 +1,12 @@
 package uk.co.generic;
 
+
 public class Triple {
 
 	private double x,y,z;
 
+	public Triple(){};
+	
 	public Triple (double inX, double inY, double inZ){
 		x = inX;
 		y = inY;
@@ -38,5 +41,12 @@ public class Triple {
 		
 		return Math.sqrt(vector.getX()*vector.getX() + vector.getY()*vector.getY() + vector.getZ()*vector.getZ());
 	}
+	
+    public void unitMultiplierSet(Vector u, double d){
+        
+        x = u.getX() * d;
+        y = u.getY() * d;
+        z = u.getZ() * d;
+    }
 	
 }
