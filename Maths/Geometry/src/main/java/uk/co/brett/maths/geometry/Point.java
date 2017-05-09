@@ -34,4 +34,15 @@ public class Point {
 		this.z = z;
 	}
 
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("===============\n");
+		sb.append("x = " + x);
+		sb.append("\ny = " + y);
+		sb.append("\nz = " + z);
+		sb.append("\n===============");
+		return sb.toString();
+		
+	}
+	
 }

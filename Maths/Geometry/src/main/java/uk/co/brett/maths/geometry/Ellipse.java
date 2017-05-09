@@ -54,8 +54,6 @@ public class Ellipse extends Shape {
 		Line l = c.getTangent(circlePoint);
 		Point intercept = new Point(l.getXIntercept(), 0d, 0d);
 		
-		Line.calculateLine(intercept, p);
-		
 		return Line.calculateLine(intercept, p);
 	}
 
