@@ -54,9 +54,18 @@ public class Ellipse extends Shape {
 		Line l = c.getTangent(circlePoint);
 		Point intercept = new Point(l.getXIntercept(), 0d, 0d);
 		
-		Line.calculateLine(intercept, p);
-		
 		return Line.calculateLine(intercept, p);
 	}
 
+	public double radiusAtDegrees(double thetaDegrees){
+		return radiusAtAngle(toRadians(thetaDegrees));
+	}
+	
+	public double radiusAtAngle(double theta){
+		
+		double a = minorRadius * majorRadius;
+		double b = pow(minorRadius * cos(theta),2d) + pow(majorRadius * sin(theta),2d);
+		return a / sqrt(b);
+	}
+	
 }
