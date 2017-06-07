@@ -16,7 +16,6 @@
  */
 package uk.co.brett.jms.maths.plotter.old;
 
-import java.util.Enumeration;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -37,7 +36,6 @@ public class JMSListener2 {
 	// Set up all the default values
 	private static final String DEFAULT_MESSAGE = "Hello, World!";
 	private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
-    private static final String DEFAULT_REQUEST_DESTINATION = "/queue/maths/request";
     private static final String DEFAULT_RESPONSE_DESTINATION = "/queue/maths/response";
 	private static final String DEFAULT_MESSAGE_COUNT = "1";
 	private static final String DEFAULT_USERNAME = "jmsuser";
@@ -67,8 +65,8 @@ public class JMSListener2 {
 			ConnectionFactory connectionFactory = (ConnectionFactory) namingContext.lookup(connectionFactoryString);
 			log.info("Found connection factory \"" + connectionFactoryString + "\" in JNDI");
 
-			int count = Integer.parseInt(System.getProperty("message.count", DEFAULT_MESSAGE_COUNT));
-			String content = System.getProperty("message.content", DEFAULT_MESSAGE);
+			Integer.parseInt(System.getProperty("message.count", DEFAULT_MESSAGE_COUNT));
+			System.getProperty("message.content", DEFAULT_MESSAGE);
 
 			try (JMSContext context = connectionFactory.createContext(userName, password)) {
 

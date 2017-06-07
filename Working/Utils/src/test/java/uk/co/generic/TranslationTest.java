@@ -1,7 +1,5 @@
 package uk.co.generic;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class TranslationTest {
@@ -19,7 +17,7 @@ public class TranslationTest {
 		// System.out.println(c1);
 		// System.out.println(c2);
 
-		Cartesian c3 = t.translate(c1, c2);
+		t.translate(c1, c2);
 
 //		System.out.println(c1);
 //		System.out.println(c2);
@@ -38,7 +36,7 @@ public class TranslationTest {
 		Cartesian c1 = Cartesian.createCartesian(l1);
 		Cartesian c2 = Cartesian.createCartesian(l2);
 
-		Cartesian c3 = t.translate(c1, c2);
+		t.translate(c1, c2);
 
 //		System.out.println(c1);
 //		System.out.println(c2);

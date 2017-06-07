@@ -5,14 +5,11 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart.Data;
-import javafx.scene.chart.XYChart.Series;
 import javafx.stage.Stage;
 
 /**
@@ -27,9 +24,7 @@ import javafx.stage.Stage;
  */
 public class PlotterMain extends Application {
     private static final int MAX_DATA_POINTS = 10;
-    private XYChart.Series series = new XYChart.Series();
-    //private Series series;
-    private int xSeriesData = 0;
+    private XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
     private ConcurrentLinkedQueue<Number> dataQX = new ConcurrentLinkedQueue<Number>();
     private ConcurrentLinkedQueue<Number> dataQY = new ConcurrentLinkedQueue<Number>();
     private ExecutorService executor;
@@ -106,7 +101,7 @@ public class PlotterMain extends Application {
     private void addDataToSeries() {
         for (int i = 0; i < 20; i++) { //-- add 20 numbers to the plot+
             if (dataQX.isEmpty()) break;
-            series.getData().add(new XYChart.Data(dataQX.remove(), dataQY.remove()));
+            series.getData().add(new XYChart.Data<Number, Number>(dataQX.remove(), dataQY.remove()));
         }
         // remove points to keep us at no more than MAX_DATA_POINTS
 //        if (series.getData().size() > MAX_DATA_POINTS) {

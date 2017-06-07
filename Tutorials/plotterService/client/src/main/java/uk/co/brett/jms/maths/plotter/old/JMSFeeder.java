@@ -80,8 +80,7 @@ public class JMSFeeder {
             	
             	String destinationRespString = System.getProperty("destination", DEFAULT_RESPONSE_DESTINATION);
             	
-            	Destination reponseDestination = (Destination) namingContext.lookup(destinationRespString);
-            	//DEFAULT_RESPONSE_DESTINATION
+            	namingContext.lookup(destinationRespString);
             	
                 log.info("Sending " + count + " messages with content: " + content);
                 // Send the specified number of messages

@@ -37,7 +37,6 @@ public class JMSListener {
 	// Set up all the default values
 	private static final String DEFAULT_MESSAGE = "Hello, World!";
 	private static final String DEFAULT_CONNECTION_FACTORY = "jms/RemoteConnectionFactory";
-    private static final String DEFAULT_REQUEST_DESTINATION = "/queue/maths/driver/request";
     private static final String DEFAULT_RESPONSE_DESTINATION = "/queue/maths/driver/response";
 	private static final String DEFAULT_MESSAGE_COUNT = "1";
 	private static final String DEFAULT_USERNAME = "jmsuser";
@@ -67,8 +66,8 @@ public class JMSListener {
 			ConnectionFactory connectionFactory = (ConnectionFactory) namingContext.lookup(connectionFactoryString);
 			log.info("Found connection factory \"" + connectionFactoryString + "\" in JNDI");
 
-			int count = Integer.parseInt(System.getProperty("message.count", DEFAULT_MESSAGE_COUNT));
-			String content = System.getProperty("message.content", DEFAULT_MESSAGE);
+			Integer.parseInt(System.getProperty("message.count", DEFAULT_MESSAGE_COUNT));
+			System.getProperty("message.content", DEFAULT_MESSAGE);
 
 			try (JMSContext context = connectionFactory.createContext(userName, password)) {
 

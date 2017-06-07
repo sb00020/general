@@ -1,7 +1,5 @@
 package uk.co.brett.jms.maths.plotter.driver;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import uk.co.brett.jms.maths.plotter.old.JMSFeeder;
