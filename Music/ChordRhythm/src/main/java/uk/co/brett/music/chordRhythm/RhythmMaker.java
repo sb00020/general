@@ -5,16 +5,13 @@ import java.util.Random;
 
 public class RhythmMaker {
 
-	private final int bars, beatsPerBar, beats, divisorBeatsPerBar;
-	private final double divisor, divisorBeats;
+	private final int beats, divisorBeatsPerBar;
+	private final double divisorBeats;
 	private boolean favourEvenNumber = true;
 
 	public RhythmMaker(final int bars, final int beatsPerBar, final double divisor) {
 
-		this.bars = bars;
-		this.beatsPerBar = beatsPerBar;
 		this.beats = bars * beatsPerBar;
-		this.divisor = divisor;
 		this.divisorBeats = ((double) beats) / divisor;
 		this.divisorBeatsPerBar = (int) (((double) beatsPerBar) / divisor);
 

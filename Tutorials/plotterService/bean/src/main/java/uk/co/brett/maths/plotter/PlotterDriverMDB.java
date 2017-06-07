@@ -19,7 +19,6 @@ import javax.jms.TextMessage;
 import com.brett.services.maths.PlotterDriverRequestType;
 import com.brett.services.maths.PlotterDriverResponseType;
 import com.brett.services.maths.PlotterRequestType;
-import com.brett.services.maths.PlotterResponseType;
 
 @MessageDriven(name = "PlotterDriverMDB", activationConfig = {
 		@ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:jboss/exported/queue/maths/driver/request"),
